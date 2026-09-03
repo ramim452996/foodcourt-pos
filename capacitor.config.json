@@ -1,0 +1,6 @@
+{
+  "appId": "com.khabarbari.foodcourtpos",
+  "appName": "FoodCourtPOS",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}

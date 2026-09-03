@@ -7,6 +7,9 @@
         "dev": "vp dev"
     },
     "dependencies": {
+        "@capacitor/android": "^8.5.1",
+        "@capacitor/cli": "^8.5.1",
+        "@capacitor/core": "^8.5.1",
         "@laravel/passkeys": "^0.2.0",
         "@tailwindcss/vite": "^4.1.11",
         "concurrently": "^10.0.3",
@@ -20,5 +23,23 @@
         "@rollup/rollup-linux-x64-gnu": "4.9.5",
         "@tailwindcss/oxide-linux-x64-gnu": "^4.0.1",
         "lightningcss-linux-x64-gnu": "^1.29.1"
-    }
+    },
+    "name": "foodcurt",
+    "version": "1.0.0",
+    "description": "",
+    "main": "sw.js",
+    "directories": {
+        "test": "tests"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ramim452996/foodcourt-pos.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/ramim452996/foodcourt-pos/issues"
+    },
+    "homepage": "https://github.com/ramim452996/foodcourt-pos#readme"
 }
