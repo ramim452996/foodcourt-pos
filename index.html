@@ -375,21 +375,12 @@
                         </template>
                     </div>
 
-                    <!-- 🤖 Direct 1-Click Download Android APK Button -->
-                    <a href="./FoodCourtPOS.apk" download="FoodCourtPOS.apk" @click="playChime(700)"
-                       class="px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-400 via-teal-500 to-emerald-600 text-slate-950 text-[11px] font-black transition-all flex items-center gap-1 cursor-pointer active:scale-95 shadow-md shadow-emerald-500/30 ring-1 ring-emerald-300"
-                       :title="lang === 'bn' ? '১-ক্লিকে অ্যান্ড্রয়েড APK ডাউনলোড করুন' : '1-Click Direct Android APK Download'">
-                        <span class="text-xs">🤖</span>
-                        <span x-text="lang === 'bn' ? 'APK' : 'APK'"></span>
-                    </a>
-
-                    <!-- 📲 Install Android PWA Button -->
+                    <!-- 📲 Direct 1-Click Install App on Android -->
                     <button type="button" @click="triggerInstallApp(); playChime(600)" 
-                            class="px-2.5 py-1.5 rounded-xl border text-[11px] font-black transition-all flex items-center gap-1 cursor-pointer active:scale-95 shadow-sm"
-                            :class="isDark ? 'bg-zinc-800 hover:bg-zinc-700 text-emerald-400 border-zinc-700' : 'bg-slate-100 hover:bg-slate-200 text-emerald-700 border-slate-200'"
-                            :title="lang === 'bn' ? 'হোমস্ক্রিনে ইনস্টল করুন' : 'Install App on Phone'">
-                        <span>📲</span>
-                        <span class="hidden xs:inline" x-text="lang === 'bn' ? 'ইনস্টল' : 'Install'"></span>
+                            class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-400 via-teal-500 to-emerald-600 text-slate-950 text-[11px] font-black transition-all flex items-center gap-1.5 cursor-pointer active:scale-95 shadow-md shadow-emerald-500/30 ring-1 ring-emerald-300"
+                            :title="lang === 'bn' ? 'ফোনে সরাসরি অ্যাপ হিসেবে ইনস্টল করুন' : 'Install App Directly on Phone'">
+                        <span class="text-xs">📲</span>
+                        <span x-text="lang === 'bn' ? 'ইনস্টল অ্যাপ' : 'Install App'"></span>
                     </button>
 
                     <!-- Language Switcher Button (Bangla <-> English) -->
@@ -482,24 +473,24 @@
             
             <div class="w-full space-y-3 sm:space-y-4">
 
-                <!-- 🤖 DIRECT ANDROID APK DOWNLOAD BANNER (1-Click Free Download) -->
+                <!-- 📲 1-CLICK APP INSTALLATION BANNER (Official Android PWA WebAPK) -->
                 <div class="px-4 py-3 rounded-2xl border flex flex-wrap items-center justify-between gap-3 shadow-lg transition-all"
                      :class="isDark ? 'bg-gradient-to-r from-emerald-950/60 via-obsidian-950 to-teal-950/60 border-emerald-500/30 text-emerald-200' : 'bg-gradient-to-r from-emerald-50 to-teal-50 border-emerald-200 text-emerald-950'">
                     <div class="flex items-center gap-2.5">
                         <div class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-xl flex-shrink-0">
-                            🤖
+                            📲
                         </div>
                         <div>
-                            <h4 class="font-black text-xs sm:text-sm" x-text="lang === 'bn' ? 'অ্যান্ড্রয়েড ফোন অ্যাপ (APK) ফ্রি ডাউনলোড' : 'Android App (APK) Free Download'"></h4>
-                            <p class="text-[11px] opacity-80" x-text="lang === 'bn' ? 'ইন্টারনেট ছাড়া এবং ইন্টারনেট সহ উভয়ভাবেই ফোন থেকে দ্রুত বিক্রয় ও হিসাব রাখার জন্য প্রস্তুত।' : 'Works 100% offline and online directly on your mobile device.'"></p>
+                            <h4 class="font-black text-xs sm:text-sm" x-text="lang === 'bn' ? 'অ্যান্ড্রয়েড ফোন অ্যাপ ১-ক্লিকে ইনস্টল করুন' : 'Install Official Android Phone App'"></h4>
+                            <p class="text-[11px] opacity-80" x-text="lang === 'bn' ? '১০০% অফলাইন ও অনলাইন মোড সাপোর্টেড। ইন্টারনেট ছাড়া সরাসরি ফোন থেকে ব্যবহারযোগ্য।' : 'Works 100% offline & online directly from your phone screen.'"></p>
                         </div>
                     </div>
                     <div class="flex items-center gap-2">
-                        <a href="./FoodCourtPOS.apk" download="FoodCourtPOS.apk" @click="playChime(650)"
-                           class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs shadow-md shadow-emerald-500/25 active:scale-95 transition-all flex items-center gap-1.5">
-                            <span>📥</span>
-                            <span x-text="lang === 'bn' ? 'সরাসরি APK ডাউনলোড করুন' : 'Download APK File'"></span>
-                        </a>
+                        <button type="button" @click="triggerInstallApp(); playChime(650)"
+                                class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs shadow-md shadow-emerald-500/25 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer">
+                            <span>⚡</span>
+                            <span x-text="lang === 'bn' ? 'ফোনে সরাসরি ইনস্টল করুন' : 'Install App on Phone'"></span>
+                        </button>
                     </div>
                 </div>
 
@@ -3558,6 +3549,50 @@
         </div>
 
         <!-- ================================================================= -->
+        <!-- ================================================================= -->
+        <!-- MODAL: 1-CLICK ANDROID APP INSTALL GUIDE (showInstallGuideModal) -->
+        <!-- ================================================================= -->
+        <div x-show="showInstallGuideModal" 
+             class="fixed inset-0 z-[80] flex items-center justify-center p-4 bg-black/85 backdrop-blur-xl"
+             x-cloak
+             x-transition>
+            <div class="w-full max-w-sm rounded-3xl border shadow-2xl p-6 space-y-4 text-center transition-all"
+                 :class="isDark ? 'glass-panel-dark border-emerald-500/40 text-white' : 'bg-white border-slate-200 text-slate-900'"
+                 @click.outside="showInstallGuideModal = false">
+                
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-slate-950 flex items-center justify-center text-2xl font-black mx-auto shadow-neon-emerald">
+                    📲
+                </div>
+
+                <div class="space-y-1">
+                    <h3 class="font-black text-base" x-text="lang === 'bn' ? 'ফোনে ১-ক্লিকে অ্যাপ ইনস্টল করুন' : 'Install App on Phone (1-Click)'"></h3>
+                    <p class="text-xs text-slate-400" x-text="lang === 'bn' ? 'প্লে স্টোর ছাড়াই সরাসরি ফোনে অ্যাপ হিসেবে চলবে (১০০% অফলাইন ও ফ্রি)' : 'No Play Store required. Works 100% offline.'"></p>
+                </div>
+
+                <!-- 2 Easy Steps Visual Guide -->
+                <div class="p-3.5 rounded-2xl border text-left space-y-2.5 text-xs font-bold"
+                     :class="isDark ? 'bg-zinc-900/80 border-white/[0.08]' : 'bg-slate-50 border-slate-200'">
+                    <div class="flex items-start gap-2.5">
+                        <span class="w-6 h-6 rounded-full bg-emerald-500 text-slate-950 flex items-center justify-center text-xs font-black flex-shrink-0">১</span>
+                        <div>
+                            <span class="text-white dark:text-white" x-text="lang === 'bn' ? 'ক্রোম ব্রাউজারের উপরে ডানদিকের তিনটি ডটে (⋮) চাপ দিন' : 'Tap the 3 dots (⋮) icon at top right in Chrome'"></span>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-2.5">
+                        <span class="w-6 h-6 rounded-full bg-emerald-500 text-slate-950 flex items-center justify-center text-xs font-black flex-shrink-0">২</span>
+                        <div>
+                            <span class="text-emerald-400 font-black" x-text="lang === 'bn' ? '"Install app" অথবা "Add to Home screen" এ চাপ দিন' : 'Tap "Install app" or "Add to Home screen"'"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" @click="showInstallGuideModal = false"
+                        class="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-slate-950 font-black text-xs shadow-md shadow-emerald-500/25 active:scale-95 transition-all cursor-pointer">
+                    <span x-text="lang === 'bn' ? 'বুঝেছি, ইনস্টল করব' : 'Got it, Let's Install'"></span>
+                </button>
+            </div>
+        </div>
+
         <!-- PRINTABLE DAILY Z-REPORT (For physical printer window.print) -->
         <div id="printable-zreport" class="font-mono text-black p-4 max-w-xs mx-auto border border-dashed border-gray-400 bg-white text-xs" style="display: none;">
             <div class="text-center pb-2 border-b border-dashed border-black">
@@ -3648,6 +3683,8 @@
                 deferredInstallPrompt: null,
                 showInstallAppBanner: true,
 
+                showInstallGuideModal: false,
+
                 triggerInstallApp() {
                     if (this.deferredInstallPrompt) {
                         this.deferredInstallPrompt.prompt();
@@ -3659,10 +3696,7 @@
                             this.deferredInstallPrompt = null;
                         });
                     } else {
-                        // Fallback manual instructions
-                        alert(this.lang === 'bn' 
-                            ? 'অ্যান্ড্রয়েড ফোনে সরাসরি ইনস্টল করতে:\n\n১. আপনার গুগল ক্রোম ব্রাউজারের উপরে ডানদিকের তিনটি ডটে (⋮) চাপ দিন।\n২. "Install app" বা "Add to Home screen" এ চাপ দিন।\n\nতাহলে এটি সরাসরি ফোনে অ্যাপ হিসেবে সেভ হয়ে যাবে এবং ইন্টারনেট ছাড়াও চলবে।' 
-                            : 'To install on Android:\n\n1. Tap the 3 dots (⋮) in Chrome.\n2. Select "Install app" or "Add to Home screen".\n\nThe app will be installed on your phone home screen and will work 100% offline.');
+                        this.showInstallGuideModal = true;
                     }
                 },
                 activeTab: 'pos',
