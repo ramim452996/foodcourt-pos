@@ -2538,6 +2538,17 @@
                 <a :href="'tel:' + posSettings.hotline.replace(/\s+/g, '')" class="hover:underline" x-text="posSettings.hotline"></a>
             </div>
 
+            <span class="hidden sm:inline text-slate-400 dark:text-zinc-600">•</span>
+
+            <!-- 4. APK Download -->
+            <div class="flex items-center">
+                <a href="./FoodCourtPOS.apk" download="FoodCourtPOS.apk" 
+                   class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 text-[10px] font-black uppercase tracking-wide cursor-pointer transition-all active:scale-95 shadow-sm transform-gpu">
+                    <span class="text-xs">⬇️</span>
+                    <span x-text="lang === 'bn' ? 'অফলাইন অ্যাপ (APK)' : 'Offline App (APK)'"></span>
+                </a>
+            </div>
+
         </footer>
 
         <!-- ================================================================= -->
