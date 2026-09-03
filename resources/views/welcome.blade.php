@@ -302,7 +302,7 @@
                                 <div class="relative flex items-center min-w-0 max-w-full">
                                     <select x-model="adminViewingOwnerId" @change="adminSwitchToOwner(adminViewingOwnerId)" 
                                             class="text-xs font-black bg-transparent border-0 focus:ring-0 cursor-pointer p-0 text-amber-400 max-w-[170px] truncate pr-4">
-                                        <option value="all" class="bg-zinc-900 text-amber-400">🌐 সকল ফুডকার্ট (সম্মিলিত)</option>
+                                        <option value="all" class="bg-zinc-900 text-amber-400" x-text="lang === 'bn' ? '🌐 সকল ফুডকার্ট (সম্মিলিত)' : '🌐 All Food Courts (Combined)'"></option>
                                         <template x-for="owner in ownerAccounts" :key="owner.id">
                                             <option :value="owner.id" class="bg-zinc-900 text-white" x-text="owner.shopName"></option>
                                         </template>
@@ -324,7 +324,7 @@
                                 <span x-text="currentDhakaTime"></span>
                             </span>
                             <span>•</span>
-                            <span class="text-amber-400 font-bold truncate" x-text="currentUserRole === 'superadmin' ? 'মেইন অ্যাডমিন কন্ট্রোল' : (currentUserRole === 'owner' ? (adminUser.stallNo || 'স্টল মালিক') : 'খাবারবাড়ি OS')"></span>
+                            <span class="text-amber-400 font-bold truncate" x-text="currentUserRole === 'superadmin' ? (lang === 'bn' ? 'মেইন অ্যাডমিন কন্ট্রোল' : 'Main Admin Control') : (currentUserRole === 'owner' ? (adminUser.stallNo || (lang === 'bn' ? 'স্টল মালিক' : 'Stall Owner')) : (lang === 'bn' ? 'খাবারবাড়ি OS' : 'KhabarBari OS'))"></span>
                         </div>
                     </div>
                 </div>
@@ -380,9 +380,9 @@
             <template x-if="currentUserRole === 'superadmin' && adminViewingOwnerId && adminViewingOwnerId !== 'all'">
                 <div class="pt-2 border-t flex items-center justify-between gap-2 text-[10px] font-bold"
                      :class="isDark ? 'border-white/[0.06] text-amber-300' : 'border-slate-100 text-amber-900'">
-                    <span class="truncate">👑 বর্তমানে ভিউ করছেন: <strong x-text="getOwnerById(adminViewingOwnerId)?.shopName"></strong></span>
+                    <span class="truncate">👑 <span x-text="lang === 'bn' ? 'বর্তমানে ভিউ করছেন:' : 'Currently Viewing:'"></span> <strong x-text="getOwnerById(adminViewingOwnerId)?.shopName"></strong></span>
                     <button type="button" @click="adminSwitchToOwner('all')" class="text-amber-400 hover:underline font-black flex-shrink-0 cursor-pointer">
-                        ↩️ সকল ফুডকার্টে ফিরুন
+                        <span x-text="lang === 'bn' ? '↩️ সকল ফুডকার্টে ফিরুন' : '↩️ Return to All Food Courts'"></span>
                     </button>
                 </div>
             </template>
@@ -417,15 +417,15 @@
                             class="px-4 py-2 rounded-xl text-xs font-black transition-all flex items-center gap-2 cursor-pointer"
                             :class="activeTab === 'login' ? 'bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 shadow-md shadow-amber-500/25 ring-1 ring-amber-300' : (isDark ? 'text-zinc-300 hover:text-white hover:bg-white/10' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100')">
                         <span x-text="isAdminLoggedIn ? (currentUserRole === 'superadmin' ? '👑' : '🏪') : '🔐'"></span>
-                        <span x-text="isAdminLoggedIn ? (currentUserRole === 'superadmin' ? 'অ্যাডমিন হাব' : 'মালিক প্রোফাইল') : 'অ্যাডমিন লগইন'"></span>
+                        <span x-text="isAdminLoggedIn ? (currentUserRole === 'superadmin' ? (lang === 'bn' ? 'অ্যাডমিন হাব' : 'Admin Hub') : (lang === 'bn' ? 'মালিক প্রোফাইল' : 'Owner Profile')) : (lang === 'bn' ? 'অ্যাডমিন লগইন' : 'Admin Login')"></span>
                     </button>
                 </div>
 
                 <!-- Desktop Quick Stats Badge -->
                 <div x-show="isAdminLoggedIn" class="flex items-center gap-3 text-xs font-mono">
-                    <span class="text-slate-400">আজকের বিক্রি: <strong class="text-emerald-400 font-black" x-text="formatCurrency(todayStats.totalRevenue)"></strong></span>
+                    <span class="text-slate-400"><span x-text="lang === 'bn' ? 'আজকের বিক্রি:' : 'Today Sales:'"></span> <strong class="text-emerald-400 font-black" x-text="formatCurrency(todayStats.totalRevenue)"></strong></span>
                     <span>•</span>
-                    <span class="text-slate-400">অর্ডার: <strong class="text-amber-400 font-black" x-text="todayStats.totalOrders"></strong></span>
+                    <span class="text-slate-400"><span x-text="lang === 'bn' ? 'অর্ডার:' : 'Orders:'"></span> <strong class="text-amber-400 font-black" x-text="todayStats.totalOrders"></strong></span>
                 </div>
             </div>
 
@@ -650,7 +650,7 @@
                                                             <div class="flex items-center justify-between gap-1 p-1 rounded-xl border"
                                                                  :class="isDark ? 'bg-obsidian-950/80 border-white/[0.08]' : 'bg-slate-50 border-slate-200'">
                                                                 <div class="flex items-center gap-1">
-                                                                    <span class="text-[10px] text-slate-400 font-sans font-bold">পরিমাণ:</span>
+                                                                    <span class="text-[10px] text-slate-400 font-sans font-bold" x-text="lang === 'bn' ? 'পরিমাণ:' : 'Qty:'"></span>
                                                                     <div class="flex items-center rounded-lg border border-white/10 overflow-hidden"
                                                                          :class="isDark ? 'bg-zinc-900' : 'bg-white'">
                                                                         <button type="button" @click="stepItemSaleQty(item.id, -1); playChime(350)" class="w-7 h-7 flex items-center justify-center text-sm font-black text-zinc-300 hover:text-white hover:bg-white/10 active:scale-95 transition-all">-</button>
@@ -660,7 +660,7 @@
 
                                                                 </div>
                                                                 <div class="text-right font-mono">
-                                                                    <span class="text-[9px] text-slate-400 block leading-none font-sans">মোট</span>
+                                                                    <span class="text-[9px] text-slate-400 block leading-none font-sans" x-text="lang === 'bn' ? 'মোট' : 'Total'"></span>
                                                                     <span class="text-xs font-black text-amber-400" x-text="'৳' + (item.price * getItemSaleQty(item.id)).toLocaleString()"></span>
                                                                 </div>
                                                             </div>
@@ -730,7 +730,7 @@
                                                 <div class="flex items-center justify-between sm:justify-end gap-1.5 sm:gap-2 pt-1.5 sm:pt-0 border-t sm:border-t-0 border-white/[0.06] flex-shrink-0" @click.stop>
                                                     <!-- Quantity Stepper -->
                                                     <div class="flex items-center gap-1">
-                                                        <span class="text-[10px] text-slate-400 font-sans sm:hidden">পরিমাণ:</span>
+                                                        <span class="text-[10px] text-slate-400 font-sans sm:hidden" x-text="lang === 'bn' ? 'পরিমাণ:' : 'Qty:'"></span>
                                                         <div class="flex items-center rounded-lg border border-white/10 overflow-hidden"
                                                              :class="isDark ? 'bg-zinc-900' : 'bg-slate-100'">
                                                             <button type="button" @click="stepItemSaleQty(item.id, -1); playChime(350)" class="w-6 h-6 flex items-center justify-center text-xs font-bold text-zinc-300 hover:text-white hover:bg-white/10">-</button>
@@ -739,7 +739,7 @@
                                                         </div>
                                                         <!-- Subtotal Preview -->
                                                         <div class="text-right font-mono min-w-[45px] sm:min-w-[50px]">
-                                                            <span class="text-[8px] text-slate-400 block font-sans leading-none sm:hidden">মোট</span>
+                                                            <span class="text-[8px] text-slate-400 block font-sans leading-none sm:hidden" x-text="lang === 'bn' ? 'মোট' : 'Total'"></span>
                                                             <span class="text-xs font-black text-amber-400" x-text="'৳' + (item.price * getItemSaleQty(item.id)).toLocaleString()"></span>
                                                         </div>
                                                     </div>
@@ -1282,7 +1282,7 @@
                                         <!-- Center Donut Core -->
                                         <div class="w-32 h-32 sm:w-36 sm:h-36 rounded-full flex flex-col items-center justify-center text-center shadow-inner z-10 transition-colors border"
                                              :class="isDark ? 'bg-obsidian-950 text-white border-white/[0.08]' : 'bg-white text-slate-900 border-slate-200'">
-                                            <span class="text-[10px] sm:text-[11px] text-slate-400 font-sans font-semibold leading-tight">মোট বিক্রি</span>
+                                            <span class="text-[10px] sm:text-[11px] text-slate-400 font-sans font-semibold leading-tight" x-text="lang === 'bn' ? 'মোট বিক্রি' : 'Total Sales'"></span>
                                             <span class="text-xl sm:text-2xl font-black font-mono text-emerald-400 my-0.5" x-text="dailySoldItemsData.totalQuantity + 'টি'"></span>
                                             <span class="text-xs sm:text-sm font-mono font-black text-slate-300 dark:text-zinc-200" x-text="'৳' + Number(dailySoldItemsData.totalRevenue).toLocaleString()"></span>
                                         </div>
@@ -1339,7 +1339,7 @@
                                 <div class="flex items-center gap-1.5 font-mono flex-shrink-0">
                                     <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center gap-0.5 whitespace-nowrap">
                                         <span>▲</span>
-                                        <span>গ্রোথ সক্রিয়</span>
+                                        <span x-text="lang === 'bn' ? 'গ্রোথ সক্রিয়' : 'Growth Active'"></span>
                                     </span>
                                 </div>
                             </div>
@@ -1348,15 +1348,15 @@
                             <div class="grid grid-cols-3 gap-1.5 sm:gap-2 p-2.5 rounded-2xl border font-mono text-center text-xs"
                                  :class="isDark ? 'bg-obsidian-950/70 border-white/[0.04]' : 'bg-slate-50 border-slate-200/60'">
                                 <div class="min-w-0">
-                                    <span class="text-[9px] text-slate-400 font-sans block truncate">সর্বোচ্চ গতি</span>
+                                    <span class="text-[9px] text-slate-400 font-sans block truncate" x-text="lang === 'bn' ? 'সর্বোচ্চ গতি' : 'Peak Velocity'"></span>
                                     <span class="font-black text-emerald-400 text-[11px] sm:text-sm truncate block" x-text="'৳' + Number(salesGrowthChartData.peakVal || todayStats.totalRevenue).toLocaleString()"></span>
                                 </div>
                                 <div class="min-w-0 border-x border-white/[0.06] px-1">
-                                    <span class="text-[9px] text-slate-400 font-sans block truncate">মোট বিক্রি</span>
+                                    <span class="text-[9px] text-slate-400 font-sans block truncate" x-text="lang === 'bn' ? 'মোট বিক্রি' : 'Total Orders'"></span>
                                     <span class="font-black text-amber-400 text-[11px] sm:text-sm truncate block" x-text="todayStats.totalOrders + ' টি'"></span>
                                 </div>
                                 <div class="min-w-0">
-                                    <span class="text-[9px] text-slate-400 font-sans block truncate">আজকের মোট</span>
+                                    <span class="text-[9px] text-slate-400 font-sans block truncate" x-text="lang === 'bn' ? 'আজকের মোট' : 'Today Total'"></span>
                                     <span class="font-black text-cyan-400 text-[11px] sm:text-sm truncate block" x-text="'৳' + Number(todayStats.totalRevenue).toLocaleString()"></span>
                                 </div>
                             </div>
@@ -2231,14 +2231,14 @@
                                 <button type="button" @click="adminEmail='kacchi@foodcourt.com'; adminPassword='kacchi123'; handleAdminLogin()" 
                                         class="p-2 rounded-xl border text-left cursor-pointer transition-all hover:scale-[1.02] active:scale-95"
                                         :class="isDark ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300' : 'bg-emerald-50 border-emerald-300 text-emerald-900'">
-                                    <div class="font-black text-[11px] flex items-center gap-1">🍛 <span>কাচ্চি বাড়ি</span></div>
+                                    <div class="font-black text-[11px] flex items-center gap-1">🍛 <span x-text="lang === 'bn' ? 'কাচ্চি বাড়ি' : 'Kacchi Bari'"></span></div>
                                     <div class="text-[9px] opacity-75 font-mono">kacchi@foodcourt.com</div>
                                 </button>
 
                                 <button type="button" @click="adminEmail='burger@foodcourt.com'; adminPassword='burger123'; handleAdminLogin()" 
                                         class="p-2 rounded-xl border text-left cursor-pointer transition-all hover:scale-[1.02] active:scale-95"
                                         :class="isDark ? 'bg-pink-500/10 border-pink-500/30 text-pink-300' : 'bg-pink-50 border-pink-300 text-pink-900'">
-                                    <div class="font-black text-[11px] flex items-center gap-1">🍔 <span>বার্গার এক্সপ্রেস</span></div>
+                                    <div class="font-black text-[11px] flex items-center gap-1">🍔 <span x-text="lang === 'bn' ? 'বার্গার এক্সপ্রেস' : 'Burger Express'"></span></div>
                                     <div class="text-[9px] opacity-75 font-mono">burger@foodcourt.com</div>
                                 </button>
                             </div>
@@ -2657,7 +2657,7 @@
                             ? 'bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 shadow-md shadow-amber-500/30 ring-1 ring-amber-300 scale-[1.02]' 
                             : (isDark ? 'text-zinc-400 hover:text-white hover:bg-white/[0.06] opacity-60 hover:opacity-100' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100 opacity-60 hover:opacity-100')">
                     <span class="text-lg leading-none transition-transform group-hover:scale-110" x-text="isAdminLoggedIn ? (currentUserRole === 'superadmin' ? '👑' : '🏪') : '🔐'"></span>
-                    <span class="tracking-wide" x-text="isAdminLoggedIn ? (currentUserRole === 'superadmin' ? 'হাব' : 'প্রোফাইল') : 'লগইন'"></span>
+                    <span class="tracking-wide" x-text="isAdminLoggedIn ? (currentUserRole === 'superadmin' ? (lang === 'bn' ? 'হাব' : 'Hub') : (lang === 'bn' ? 'প্রোফাইল' : 'Profile')) : (lang === 'bn' ? 'লগইন' : 'Login')"></span>
                 </button>
 
             </div>
@@ -3008,7 +3008,7 @@
                 <div class="space-y-3 text-xs">
                     <!-- Full Name -->
                     <div>
-                        <label class="text-slate-600 dark:text-slate-400 font-bold block mb-1">মালিকের পূর্ণ নাম *</label>
+                        <label class="text-slate-600 dark:text-slate-400 font-bold block mb-1" x-text="lang === 'bn' ? 'মালিকের পূর্ণ নাম *' : 'Owner Full Name *'"></label>
                         <input type="text" x-model="ownerForm.name" placeholder="যেমন: রহিম খান"
                                class="w-full px-3 py-2.5 rounded-xl border focus:outline-none transition-all font-medium"
                                :class="isDark ? 'bg-obsidian-950 text-white border-zinc-700 focus:border-emerald-500' : 'bg-slate-50 text-slate-900 border-slate-200 focus:border-emerald-600'">
@@ -3016,7 +3016,7 @@
 
                     <!-- Shop / Foodcourt Name -->
                     <div>
-                        <label class="text-slate-600 dark:text-slate-400 font-bold block mb-1">ফুডকার্টের নাম *</label>
+                        <label class="text-slate-600 dark:text-slate-400 font-bold block mb-1" x-text="lang === 'bn' ? 'ফুডকার্টের নাম *' : 'Food Cart Name *'"></label>
                         <input type="text" x-model="ownerForm.shopName" placeholder="যেমন: বার্গার কিংডম ফুডকার্ট"
                                class="w-full px-3 py-2.5 rounded-xl border focus:outline-none transition-all font-medium"
                                :class="isDark ? 'bg-obsidian-950 text-white border-zinc-700 focus:border-emerald-500' : 'bg-slate-50 text-slate-900 border-slate-200 focus:border-emerald-600'">
@@ -3024,13 +3024,13 @@
 
                     <div class="grid grid-cols-2 gap-2.5">
                         <div>
-                            <label class="text-slate-600 dark:text-slate-400 font-bold block mb-1">স্টল নম্বর</label>
+                            <label class="text-slate-600 dark:text-slate-400 font-bold block mb-1" x-text="lang === 'bn' ? 'স্টল নম্বর' : 'Stall Number'"></label>
                             <input type="text" x-model="ownerForm.stallNo" placeholder="Stall #03"
                                    class="w-full px-3 py-2.5 rounded-xl border focus:outline-none font-mono"
                                    :class="isDark ? 'bg-obsidian-950 text-white border-zinc-700 focus:border-emerald-500' : 'bg-slate-50 text-slate-900 border-slate-200 focus:border-emerald-600'">
                         </div>
                         <div>
-                            <label class="text-slate-600 dark:text-slate-400 font-bold block mb-1">ফোন নম্বর</label>
+                            <label class="text-slate-600 dark:text-slate-400 font-bold block mb-1" x-text="lang === 'bn' ? 'ফোন নম্বর' : 'Phone Number'"></label>
                             <input type="text" x-model="ownerForm.phone" placeholder="+880 1711..."
                                    class="w-full px-3 py-2.5 rounded-xl border focus:outline-none font-mono"
                                    :class="isDark ? 'bg-obsidian-950 text-white border-zinc-700 focus:border-emerald-500' : 'bg-slate-50 text-slate-900 border-slate-200 focus:border-emerald-600'">
@@ -3039,7 +3039,7 @@
 
                     <!-- Email -->
                     <div>
-                        <label class="text-slate-600 dark:text-slate-400 font-bold block mb-1">লগইন ইমেইল *</label>
+                        <label class="text-slate-600 dark:text-slate-400 font-bold block mb-1" x-text="lang === 'bn' ? 'লগইন ইমেইল *' : 'Login Email *'"></label>
                         <input type="email" x-model="ownerForm.email" placeholder="owner@foodcourt.com"
                                :disabled="ownerFormMode === 'edit' && ownerForm.role === 'superadmin'"
                                class="w-full px-3 py-2.5 rounded-xl border focus:outline-none transition-all font-mono"
@@ -3049,13 +3049,13 @@
                     <!-- Password + Confirm Password (side by side) -->
                     <div class="grid grid-cols-2 gap-2.5">
                         <div>
-                            <label class="text-slate-600 dark:text-slate-400 font-bold block mb-1">পাসওয়ার্ড *</label>
+                            <label class="text-slate-600 dark:text-slate-400 font-bold block mb-1" x-text="lang === 'bn' ? 'পাসওয়ার্ড *' : 'Password *'"></label>
                             <input type="password" x-model="ownerForm.password" placeholder="••••••••"
                                    class="w-full px-3 py-2.5 rounded-xl border focus:outline-none transition-all font-mono"
                                    :class="isDark ? 'bg-obsidian-950 text-white border-zinc-700 focus:border-emerald-500' : 'bg-slate-50 text-slate-900 border-slate-200 focus:border-emerald-600'">
                         </div>
                         <div>
-                            <label class="text-slate-600 dark:text-slate-400 font-bold block mb-1">পাসওয়ার্ড নিশ্চিত *</label>
+                            <label class="text-slate-600 dark:text-slate-400 font-bold block mb-1" x-text="lang === 'bn' ? 'পাসওয়ার্ড নিশ্চিত *' : 'Confirm Password *'"></label>
                             <input type="password" x-model="ownerForm.confirmPassword" placeholder="••••••••"
                                    class="w-full px-3 py-2.5 rounded-xl border focus:outline-none transition-all font-mono"
                                    :class="[
@@ -3127,11 +3127,11 @@
                             <select x-model="editingItem.category" 
                                     class="w-full px-2.5 py-2 rounded-xl border focus:outline-none font-medium cursor-pointer"
                                     :class="isDark ? 'bg-obsidian-950 text-white border-zinc-700 focus:border-emerald-500' : 'bg-slate-50 text-slate-900 border-slate-200 focus:border-emerald-600'">
-                                <option value="biryani_rice">বিরিয়ানি ও ভাত (Rice)</option>
-                                <option value="burgers_fastfood">বার্গার ও ফাস্টফুড (Burger)</option>
+                                <option value="biryani_rice" x-text="lang === 'bn' ? 'বিরিয়ানি ও ভাত (Rice)' : 'Biryani & Rice'"></option>
+                                <option value="burgers_fastfood" x-text="lang === 'bn' ? 'বার্গার ও ফাস্টফুড (Burger)' : 'Burgers & Fast Food'"></option>
                                 <option value="streetfood_chaat">চাট ও ফুচকা (Streetfood)</option>
-                                <option value="beverages_cha">চা ও কফি (Beverages)</option>
-                                <option value="sweets_falooda">ফালুদা ও মিষ্টি (Desserts)</option>
+                                <option value="beverages_cha" x-text="lang === 'bn' ? 'চা ও কফি (Beverages)' : 'Tea & Beverages'"></option>
+                                <option value="sweets_falooda" x-text="lang === 'bn' ? 'ফালুদা ও মিষ্টি (Desserts)' : 'Desserts & Sweets'"></option>
                             </select>
                         </div>
                         <div>
@@ -3217,12 +3217,12 @@
                                 :class="isDark ? 'bg-obsidian-950 text-white border-zinc-700 focus:border-rose-500' : 'bg-slate-50 text-slate-900 border-slate-200 focus:border-rose-500'">
                             <option value="meat">🥩 মাংস, মুরগি ও ডিম (Meat & Poultry)</option>
                             <option value="rice_flour">🍚 চাল, ময়দা ও সুজি (Rice & Grains)</option>
-                            <option value="oil_spices">🛢️ তেল, ঘি ও মসলা (Oil & Spices)</option>
-                            <option value="vegetables">🥦 শাকসবজি ও কাঁচাবাজার (Vegetables)</option>
-                            <option value="dairy">🥛 দুধ, ছানা ও মিষ্টি (Dairy & Curd)</option>
-                            <option value="packaging">📦 প্যাকেজিং বক্স ও ফয়েল (Packaging)</option>
+                            <option value="oil_spices" x-text="lang === 'bn' ? '🛢️ তেল, ঘি ও মসলা (Oil & Spices)' : '🛢️ Oil, Ghee & Spices'"></option>
+                            <option value="vegetables" x-text="lang === 'bn' ? '🥦 শাকসবজি ও কাঁচাবাজার (Vegetables)' : '🥦 Vegetables & Groceries'"></option>
+                            <option value="dairy" x-text="lang === 'bn' ? '🥛 দুধ, ছানা ও মিষ্টি (Dairy & Curd)' : '🥛 Milk & Dairy'"></option>
+                            <option value="packaging" x-text="lang === 'bn' ? '📦 প্যাকেজিং বক্স ও ফয়েল (Packaging)' : '📦 Packaging Boxes & Foil'"></option>
                             <option value="gas_utility">🔥 গ্যাস সিলিন্ডার ও জ্বালানি (Gas & Fuel)</option>
-                            <option value="other">🧾 অন্যান্য ফুটফরমাশ ও খরচ (Other)</option>
+                            <option value="other" x-text="lang === 'bn' ? '🧾 অন্যান্য ফুটফরমাশ ও খরচ (Other)' : '🧾 Other Expenses'"></option>
                         </select>
                     </div>
 
@@ -4060,7 +4060,7 @@
                         const owner = this.getOwnerById(this.adminViewingOwnerId);
                         return owner ? owner.shopName : this.posSettings.storeName;
                     }
-                    return this.posSettings.storeName || (this.lang === 'bn' ? 'খাবারবাড়ি ফুডকার্ট' : 'Khabarbari Food Court');
+                    return this.lang === 'bn' ? (this.posSettings.storeName || 'খাবারবাড়ি POS & ফুডকার্ট') : 'KhabarBari POS & Food Cart';
                 },
 
                 getAccounts() {
