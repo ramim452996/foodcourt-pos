@@ -302,7 +302,7 @@
                                 <div class="relative flex items-center min-w-0 max-w-full">
                                     <select x-model="adminViewingOwnerId" @change="adminSwitchToOwner(adminViewingOwnerId)" 
                                             class="text-xs font-black bg-transparent border-0 focus:ring-0 cursor-pointer p-0 text-amber-400 max-w-[170px] truncate pr-4">
-                                        <option value="all" class="bg-zinc-900 text-amber-400">🌐 সকল ফুডকোর্ট (সম্মিলিত)</option>
+                                        <option value="all" class="bg-zinc-900 text-amber-400">🌐 সকল ফুডকার্ট (সম্মিলিত)</option>
                                         <template x-for="owner in ownerAccounts" :key="owner.id">
                                             <option :value="owner.id" class="bg-zinc-900 text-white" x-text="owner.shopName"></option>
                                         </template>
@@ -382,7 +382,7 @@
                      :class="isDark ? 'border-white/[0.06] text-amber-300' : 'border-slate-100 text-amber-900'">
                     <span class="truncate">👑 বর্তমানে ভিউ করছেন: <strong x-text="getOwnerById(adminViewingOwnerId)?.shopName"></strong></span>
                     <button type="button" @click="adminSwitchToOwner('all')" class="text-amber-400 hover:underline font-black flex-shrink-0 cursor-pointer">
-                        ↩️ সকল ফুডকোর্টে ফিরুন
+                        ↩️ সকল ফুডকার্টে ফিরুন
                     </button>
                 </div>
             </template>
@@ -596,7 +596,7 @@
                                                     <div class="flex items-center gap-1">
                                                         <span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-black/80 backdrop-blur-md text-emerald-400 border border-white/10" x-text="'#' + item.code"></span>
                                                         <template x-if="currentUserRole === 'superadmin' && (adminViewingOwnerId === 'all' || !adminViewingOwnerId)">
-                                                            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-black/80 backdrop-blur-md text-amber-300 border border-amber-500/40" x-text="item.foodCourtName || 'ফুডকোর্ট'"></span>
+                                                            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-black/80 backdrop-blur-md text-amber-300 border border-amber-500/40" x-text="item.foodCourtName || 'ফুডকার্ট'"></span>
                                                         </template>
                                                         <span x-show="isAdminLoggedIn"
                                                               class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-black/80 backdrop-blur-md text-amber-300 border border-amber-500/40 shadow-xs flex items-center gap-0.5"
@@ -1493,7 +1493,7 @@
                                     <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
                                     <span class="font-mono font-black text-xs text-slate-900 dark:text-white" x-text="order.orderId"></span>
                                     <template x-if="currentUserRole === 'superadmin' && (adminViewingOwnerId === 'all' || !adminViewingOwnerId)">
-                                        <span class="text-[9px] px-1.5 py-0.2 rounded font-sans font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30" x-text="order.foodCourtName || 'ফুডকোর্ট'"></span>
+                                        <span class="text-[9px] px-1.5 py-0.2 rounded font-sans font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30" x-text="order.foodCourtName || 'ফুডকার্ট'"></span>
                                     </template>
                                     <span class="text-[10px] px-1.5 py-0.2 rounded font-medium"
                                           :class="isDark ? 'bg-zinc-800 text-zinc-300' : 'bg-slate-100 text-slate-600'"
@@ -1569,7 +1569,7 @@
                                         <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
                                         <span x-text="order.orderId"></span>
                                         <template x-if="currentUserRole === 'superadmin' && (adminViewingOwnerId === 'all' || !adminViewingOwnerId)">
-                                            <span class="text-[9px] px-1.5 py-0.2 rounded font-sans font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30" x-text="order.foodCourtName || 'ফুডকোর্ট'"></span>
+                                            <span class="text-[9px] px-1.5 py-0.2 rounded font-sans font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30" x-text="order.foodCourtName || 'ফুডকার্ট'"></span>
                                         </template>
                                     </td>
                                     <td class="p-2.5">
@@ -2154,7 +2154,7 @@
         <!-- ================================================================= -->
         <main x-show="activeTab === 'export' || activeTab === 'admin-settings'" class="flex-1 space-y-4">
             <div class="p-4 sm:p-6 rounded-2xl border transition-all space-y-4" :class="isDark ? 'glass-panel-dark' : 'glass-panel-light'">
-                <h3 class="font-black text-base text-slate-900 dark:text-white" x-text="lang === 'bn' ? 'ফুডকোর্ট সেটিংস ও CSV এক্সপোর্ট' : 'Food Court Settings & CSV Export'"></h3>
+                <h3 class="font-black text-base text-slate-900 dark:text-white" x-text="lang === 'bn' ? 'ফুডকার্ট সেটিংস ও CSV এক্সপোর্ট' : 'Food Court Settings & CSV Export'"></h3>
                 <div class="space-y-3 text-xs">
                     <div>
                         <label class="font-bold text-slate-600 dark:text-slate-400 block mb-1" x-text="lang === 'bn' ? 'স্টোরের নাম' : 'Store Name'"></label>
@@ -2196,7 +2196,7 @@
                             🔐
                         </div>
                         <h2 class="text-xl sm:text-2xl font-black tracking-tight" x-text="lang === 'bn' ? 'খাবারবাড়ি সিকিউর পোর্টাল' : 'Khabarbari Secure Portal'"></h2>
-                        <p class="text-xs text-slate-400" x-text="lang === 'bn' ? 'মেইন অ্যাডমিন অথবা আপনার ফুডকোর্ট একাউন্টে লগইন করুন' : 'Sign in as Main Admin or Food Court Owner with your password'"></p>
+                        <p class="text-xs text-slate-400" x-text="lang === 'bn' ? 'মেইন অ্যাডমিন অথবা আপনার ফুডকার্ট একাউন্টে লগইন করুন' : 'Sign in as Main Admin or Food Court Owner with your password'"></p>
                     </div>
 
                     <!-- Error Alert -->
@@ -2285,10 +2285,10 @@
                                         </div>
                                         <div>
                                             <div class="flex items-center gap-2 flex-wrap">
-                                                <h2 class="text-lg sm:text-xl font-black text-slate-900 dark:text-white" x-text="lang === 'bn' ? 'সেন্ট্রাল ফুডকোর্ট কন্ট্রোল হাব (Main Admin)' : 'Central Food Court Control Hub'"></h2>
+                                                <h2 class="text-lg sm:text-xl font-black text-slate-900 dark:text-white" x-text="lang === 'bn' ? 'সেন্ট্রাল ফুডকার্ট কন্ট্রোল হাব (Main Admin)' : 'Central Food Court Control Hub'"></h2>
                                                 <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-amber-500/20 text-amber-400 border border-amber-500/40" x-text="lang === 'bn' ? 'সুপার অ্যাডমিন' : 'Super Admin'"></span>
                                             </div>
-                                            <p class="text-xs text-slate-400" x-text="lang === 'bn' ? 'আপনি ওয়েবসাইটের প্রধান অ্যাডমিন। সকল ফুডকোর্ট মালিকের তথ্য, বিক্রয় হিসাব ও খাদ্য তালিকা আপনার নিয়ন্ত্রণে।' : 'Full administrative access: inspect, manage and oversee all food court stalls'"></p>
+                                            <p class="text-xs text-slate-400" x-text="lang === 'bn' ? 'আপনি ওয়েবসাইটের প্রধান অ্যাডমিন। সকল ফুডকার্ট মালিকের তথ্য, বিক্রয় হিসাব ও খাদ্য তালিকা আপনার নিয়ন্ত্রণে।' : 'Full administrative access: inspect, manage and oversee all food court stalls'"></p>
                                         </div>
                                     </div>
 
@@ -2296,7 +2296,7 @@
                                         <button type="button" @click="openAddOwnerModal()" 
                                                 class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 text-slate-950 font-black text-xs shadow-md flex items-center gap-1.5 cursor-pointer active:scale-95 transition-all">
                                             <span>➕</span>
-                                            <span x-text="lang === 'bn' ? 'নতুন ফুডকোর্ট মালিক' : 'Add Food Court'"></span>
+                                            <span x-text="lang === 'bn' ? 'নতুন ফুডকার্ট মালিক' : 'Add Food Court'"></span>
                                         </button>
                                         <button type="button" @click="logoutAdmin()" 
                                                 class="px-3.5 py-2 rounded-xl bg-rose-500/15 hover:bg-rose-500/25 text-rose-400 border border-rose-500/30 font-black text-xs flex items-center gap-1 cursor-pointer transition-all">
@@ -2310,7 +2310,7 @@
                                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
                                     <div class="p-3.5 rounded-2xl border text-center transition-all"
                                          :class="isDark ? 'bg-obsidian-950/80 border-white/[0.08]' : 'bg-slate-50 border-slate-200'">
-                                        <span class="text-[11px] text-slate-400 block font-bold" x-text="lang === 'bn' ? '🏪 মোট ফুডকোর্ট' : 'Total Food Courts'"></span>
+                                        <span class="text-[11px] text-slate-400 block font-bold" x-text="lang === 'bn' ? '🏪 মোট ফুডকার্ট' : 'Total Food Courts'"></span>
                                         <span class="text-xl font-black text-amber-400" x-text="ownerAccounts.length + ' টি'"></span>
                                     </div>
                                     <div class="p-3.5 rounded-2xl border text-center transition-all"
@@ -2340,10 +2340,10 @@
                                     <div>
                                         <h3 class="font-black text-base text-slate-900 dark:text-white flex items-center gap-2">
                                             <span>🏪</span>
-                                            <span x-text="lang === 'bn' ? 'ফুডকোর্ট মালিকদের তালিকা ও স্টল মনিটর' : 'Food Court Owners & Stalls'"></span>
+                                            <span x-text="lang === 'bn' ? 'ফুডকার্ট মালিকদের তালিকা ও স্টল মনিটর' : 'Food Court Owners & Stalls'"></span>
                                             <span class="px-2 py-0.5 rounded-full text-xs font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/30" x-text="ownerAccounts.length + ' টি স্টল'"></span>
                                         </h3>
-                                        <p class="text-xs text-slate-400 mt-0.5" x-text="lang === 'bn' ? 'যেকোনো ফুডকোর্টের হিসাব দেখতে 'এই ফুডকোর্টে সুইচ করুন' বাটনে চাপুন' : 'Click Switch to inspect specific stall\'s POS menu and ledger'"></p>
+                                        <p class="text-xs text-slate-400 mt-0.5" x-text="lang === 'bn' ? 'যেকোনো ফুডকার্টের হিসাব দেখতে 'এই ফুডকার্টে সুইচ করুন' বাটনে চাপুন' : 'Click Switch to inspect specific stall\'s POS menu and ledger'"></p>
                                     </div>
 
                                     <!-- Quick Switch to All -->
@@ -2351,7 +2351,7 @@
                                             class="px-3 py-1.5 rounded-xl border text-xs font-bold cursor-pointer transition-all flex items-center gap-1.5"
                                             :class="adminViewingOwnerId === 'all' ? 'bg-amber-500 text-slate-950 font-black border-amber-500' : (isDark ? 'bg-zinc-800 text-zinc-300 border-zinc-700 hover:bg-zinc-700' : 'bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200')">
                                         <span>🌐</span>
-                                        <span x-text="lang === 'bn' ? 'সকল ফুডকোর্ট ভিউ' : 'View All Combined'"></span>
+                                        <span x-text="lang === 'bn' ? 'সকল ফুডকার্ট ভিউ' : 'View All Combined'"></span>
                                         <span x-show="adminViewingOwnerId === 'all'">✓</span>
                                     </button>
                                 </div>
@@ -2468,7 +2468,7 @@
                             <div class="p-3.5 rounded-2xl border flex items-center gap-2.5 text-xs font-semibold"
                                  :class="isDark ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300' : 'bg-emerald-50 border-emerald-200 text-emerald-800'">
                                 <span class="text-base flex-shrink-0">🔒</span>
-                                <span x-text="lang === 'bn' ? 'সুরক্ষিত তথ্য নীতি: আপনি শুধুমাত্র আপনার ফুডকোর্টের খাদ্য আইটেম, বিক্রয় হিসাব এবং কাঁচামাল খরচ দেখতে ও পরিচালনা করতে পারবেন।' : 'Privacy secured: you can only view and manage your own food court records.'"></span>
+                                <span x-text="lang === 'bn' ? 'সুরক্ষিত তথ্য নীতি: আপনি শুধুমাত্র আপনার ফুডকার্টের খাদ্য আইটেম, বিক্রয় হিসাব এবং কাঁচামাল খরচ দেখতে ও পরিচালনা করতে পারবেন।' : 'Privacy secured: you can only view and manage your own food court records.'"></span>
                             </div>
 
                             <!-- Owner Fast Sales Stats -->
@@ -2496,7 +2496,7 @@
                             <div class="space-y-2 pt-2">
                                 <button type="button" @click="activeTab = 'pos'" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 text-slate-950 font-black text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md">
                                     <span>🍔</span>
-                                    <span x-text="lang === 'bn' ? 'আমার ফুডকোর্ট মেনুতে যান (Cash, bKash, Nagad বিক্রি)' : 'Go to POS Menu (Sell with Cash/bKash/Nagad)'"></span>
+                                    <span x-text="lang === 'bn' ? 'আমার ফুডকার্ট মেনুতে যান (Cash, bKash, Nagad বিক্রি)' : 'Go to POS Menu (Sell with Cash/bKash/Nagad)'"></span>
                                 </button>
                                 <button type="button" @click="activeTab = 'ledger'" class="w-full py-3 rounded-xl border font-black text-xs transition-all flex items-center justify-center gap-2 cursor-pointer"
                                         :class="isDark ? 'bg-zinc-800 text-zinc-200 border-zinc-700 hover:bg-zinc-700' : 'bg-slate-100 text-slate-800 border-slate-200 hover:bg-slate-200'">
@@ -2706,7 +2706,7 @@
                 <div class="p-3.5 rounded-2xl border text-xs font-mono space-y-1.5"
                      :class="isDark ? 'bg-obsidian-950/80 border-white/[0.08] text-zinc-300' : 'bg-slate-50 border-slate-200 text-slate-700'">
                     <div class="flex justify-between items-center">
-                        <span class="text-slate-400 font-sans font-bold" x-text="lang === 'bn' ? 'ফুডকোর্ট স্টল:' : 'Stall Name:'"></span>
+                        <span class="text-slate-400 font-sans font-bold" x-text="lang === 'bn' ? 'ফুডকার্ট স্টল:' : 'Stall Name:'"></span>
                         <span class="font-black text-emerald-400 text-sm" x-text="getActiveFoodCourtTitle()"></span>
                     </div>
                     <div class="flex justify-between items-center">
@@ -2790,7 +2790,7 @@
                 <div class="p-3.5 rounded-2xl border text-xs font-mono space-y-1.5"
                      :class="isDark ? 'bg-obsidian-950/80 border-white/[0.08] text-zinc-300' : 'bg-slate-50 border-slate-200 text-slate-700'">
                     <div class="flex justify-between items-center">
-                        <span class="text-slate-400 font-sans font-bold" x-text="lang === 'bn' ? 'ফুডকোর্ট স্টল:' : 'Stall Name:'"></span>
+                        <span class="text-slate-400 font-sans font-bold" x-text="lang === 'bn' ? 'ফুডকার্ট স্টল:' : 'Stall Name:'"></span>
                         <span class="font-black text-amber-400 text-sm" x-text="getActiveFoodCourtTitle()"></span>
                     </div>
                     <div class="flex justify-between items-center">
@@ -3001,7 +3001,7 @@
                         <div class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-base font-bold">🏪</div>
                         <div>
                             <h3 class="font-black text-sm text-slate-900 dark:text-white"
-                                x-text="ownerFormMode === 'add' ? 'নতুন ফুডকোর্ট মালিক যোগ করুন' : 'মালিকের তথ্য সম্পাদনা করুন'"></h3>
+                                x-text="ownerFormMode === 'add' ? 'নতুন ফুডকার্ট মালিক যোগ করুন' : 'মালিকের তথ্য সম্পাদনা করুন'"></h3>
                             <p class="text-[10px] text-slate-400" x-text="ownerFormMode === 'add' ? 'নতুন মালিকের লগইন তথ্য সেট করুন' : 'মালিকের তথ্য পরিবর্তন করুন'"></p>
                         </div>
                     </div>
@@ -3024,8 +3024,8 @@
 
                     <!-- Shop / Foodcourt Name -->
                     <div>
-                        <label class="text-slate-600 dark:text-slate-400 font-bold block mb-1">ফুডকোর্টের নাম *</label>
-                        <input type="text" x-model="ownerForm.shopName" placeholder="যেমন: বার্গার কিংডম ফুডকোর্ট"
+                        <label class="text-slate-600 dark:text-slate-400 font-bold block mb-1">ফুডকার্টের নাম *</label>
+                        <input type="text" x-model="ownerForm.shopName" placeholder="যেমন: বার্গার কিংডম ফুডকার্ট"
                                class="w-full px-3 py-2.5 rounded-xl border focus:outline-none transition-all font-medium"
                                :class="isDark ? 'bg-obsidian-950 text-white border-zinc-700 focus:border-emerald-500' : 'bg-slate-50 text-slate-900 border-slate-200 focus:border-emerald-600'">
                     </div>
@@ -3666,8 +3666,8 @@
 
                 // Settings
                 posSettings: {
-                    storeName: 'খাবারবাড়ি POS & ফুডকোর্ট',
-                    hubLocation: 'ঢাকা ফুডকোর্ট হাব',
+                    storeName: 'খাবারবাড়ি POS & ফুডকার্ট',
+                    hubLocation: 'ঢাকা ফুডকার্ট হাব',
                     hotline: '+880 1711-234567',
                     address: 'ধানমন্ডি ২৭, ঢাকা-১২০৯',
                     email: 'info@khabarbari.com',
@@ -4009,7 +4009,7 @@
                         } catch(e) {}
                     }
 
-                    const savedSettings = localStorage.getItem('khabarbari_settings');
+                    const savedSettings = localStorage.getItem('khabarbari_settings_v3');
                     if (savedSettings) {
                         try {
                             this.posSettings = { ...this.posSettings, ...JSON.parse(savedSettings) };
@@ -4063,17 +4063,17 @@
                     }
                     if (this.currentUserRole === 'superadmin') {
                         if (this.adminViewingOwnerId === 'all' || !this.adminViewingOwnerId) {
-                            return (this.lang === 'bn' ? 'সেন্ট্রাল ফুডকোর্ট হাব (সকল স্টল)' : 'Central Food Court Hub (All Stalls)');
+                            return (this.lang === 'bn' ? 'সেন্ট্রাল ফুডকার্ট হাব (সকল স্টল)' : 'Central Food Court Hub (All Stalls)');
                         }
                         const owner = this.getOwnerById(this.adminViewingOwnerId);
                         return owner ? owner.shopName : this.posSettings.storeName;
                     }
-                    return this.posSettings.storeName || (this.lang === 'bn' ? 'খাবারবাড়ি ফুডকোর্ট' : 'Khabarbari Food Court');
+                    return this.posSettings.storeName || (this.lang === 'bn' ? 'খাবারবাড়ি ফুডকার্ট' : 'Khabarbari Food Court');
                 },
 
                 getAccounts() {
                     try {
-                        const saved = localStorage.getItem('khabarbari_accounts_v2');
+                        const saved = localStorage.getItem('khabarbari_accounts_v3');
                         if (saved) {
                             const parsed = JSON.parse(saved);
                             if (Array.isArray(parsed) && parsed.length > 0) return parsed;
@@ -4095,7 +4095,7 @@
                         {
                             id: 'fc_kacchi',
                             name: 'তানভীর আহমেদ',
-                            shopName: 'কাচ্চি বাড়ি ফুডকোর্ট',
+                            shopName: 'কাচ্চি বাড়ি ফুডকার্ট',
                             stallNo: 'Stall #01',
                             phone: '+880 1711-112233',
                             email: 'kacchi@foodcourt.com',
@@ -4105,7 +4105,7 @@
                         {
                             id: 'fc_burger',
                             name: 'ফারহান চৌধুরী',
-                            shopName: 'বার্গার এক্সপ্রেস ফুডকোর্ট',
+                            shopName: 'বার্গার এক্সপ্রেস ফুডকার্ট',
                             stallNo: 'Stall #02',
                             phone: '+880 1722-445566',
                             email: 'burger@foodcourt.com',
@@ -4113,7 +4113,7 @@
                             role: 'owner'
                         }
                     ];
-                    localStorage.setItem('khabarbari_accounts_v2', JSON.stringify(defaults));
+                    localStorage.setItem('khabarbari_accounts_v3', JSON.stringify(defaults));
                     return defaults;
                 },
 
@@ -4296,7 +4296,7 @@
                     this.adminUser = { 
                         name: found.name, 
                         email: found.email, 
-                        shopName: found.shopName || (found.name + ' ফুডকোর্ট'),
+                        shopName: found.shopName || (found.name + ' ফুডকার্ট'),
                         stallNo: found.stallNo || ''
                     };
 
@@ -4328,10 +4328,10 @@
                     this.adminViewingOwnerId = ownerId;
                     this.loadStoredData();
                     if (ownerId === 'all') {
-                        this.showToast((this.lang === 'bn' ? '🌐 সকল ফুডকোর্টের সম্মিলিত ভিউ সক্রিয়' : 'Switched to All Food Courts View'), '🌐');
+                        this.showToast((this.lang === 'bn' ? '🌐 সকল ফুডকার্টের সম্মিলিত ভিউ সক্রিয়' : 'Switched to All Food Courts View'), '🌐');
                     } else {
                         const owner = this.getOwnerById(ownerId);
-                        this.showToast((this.lang === 'bn' ? '🏪 ' + (owner?.shopName || 'ফুডকোর্ট') + ' এ সুইচ করা হয়েছে' : 'Switched to ' + (owner?.shopName || 'Food Court')), '👁️');
+                        this.showToast((this.lang === 'bn' ? '🏪 ' + (owner?.shopName || 'ফুডকার্ট') + ' এ সুইচ করা হয়েছে' : 'Switched to ' + (owner?.shopName || 'Food Court')), '👁️');
                     }
                     this.playChime(600);
                 },
@@ -4395,7 +4395,7 @@
                         const newOwner = {
                             id: 'fc_' + Date.now(),
                             name: name.trim(),
-                            shopName: shopName.trim() || (name.trim() + ' ফুডকোর্ট'),
+                            shopName: shopName.trim() || (name.trim() + ' ফুডকার্ট'),
                             stallNo: stallNo.trim() || ('Stall #' + (this.ownerAccounts.length + 1)),
                             phone: phone.trim() || '',
                             email: email.trim().toLowerCase(),
@@ -4425,7 +4425,7 @@
                         localStorage.setItem('khabarbari_fc_' + newOwner.id + '_sales', JSON.stringify([]));
                         localStorage.setItem('khabarbari_fc_' + newOwner.id + '_raw', JSON.stringify([]));
 
-                        this.ownerFormSuccess = (this.lang === 'bn' ? '✓ নতুন ফুডকোর্ট ও মালিক সফলভাবে নিবন্ধিত হয়েছে।' : 'Food court added successfully.');
+                        this.ownerFormSuccess = (this.lang === 'bn' ? '✓ নতুন ফুডকার্ট ও মালিক সফলভাবে নিবন্ধিত হয়েছে।' : 'Food court added successfully.');
                         this.showToast((newOwner.shopName + ' যোগ করা হয়েছে'), '✅');
                     } else {
                         const idx = accountsList.findIndex(a => a.id === this.editingOwnerId);
@@ -4447,7 +4447,7 @@
                             password: password
                         };
                         this.saveAccounts(accountsList);
-                        this.ownerFormSuccess = (this.lang === 'bn' ? '✓ ফুডকোর্টের তথ্য সফলভাবে আপডেট হয়েছে।' : 'Updated successfully.');
+                        this.ownerFormSuccess = (this.lang === 'bn' ? '✓ ফুডকার্টের তথ্য সফলভাবে আপডেট হয়েছে।' : 'Updated successfully.');
                         this.showToast((accountsList[idx].shopName + ' আপডেট হয়েছে'), '✅');
                     }
 
@@ -4463,7 +4463,7 @@
                         this.showToast((this.lang === 'bn' ? 'সুপার অ্যাডমিন মুছে ফেলা যাবে না।' : 'Cannot delete Super Admin'), '⚠️');
                         return;
                     }
-                    if (!confirm(this.lang === 'bn' ? 'আপনি কি সত্যিই "' + owner.shopName + '" মুছে ফেলতে চান? এই ফুডকোর্টের সকল খাদ্য তালিকা ও সেলস রেকর্ড মুছে যাবে।' : 'Delete this food court and all its data?')) {
+                    if (!confirm(this.lang === 'bn' ? 'আপনি কি সত্যিই "' + owner.shopName + '" মুছে ফেলতে চান? এই ফুডকার্টের সকল খাদ্য তালিকা ও সেলস রেকর্ড মুছে যাবে।' : 'Delete this food court and all its data?')) {
                         return;
                     }
                     // Clean up scoped storage
@@ -4601,7 +4601,7 @@
                                 customerRef: 'Table 04',
                                 paymentMethod: 'bKash',
                                 foodCourtId: 'fc_kacchi',
-                                foodCourtName: 'কাচ্চি বাড়ি ফুডকোর্ট',
+                                foodCourtName: 'কাচ্চি বাড়ি ফুডকার্ট',
                                 items: [
                                     { id: 'k1', name: 'Special Mutton Kacchi Biryani', nameBn: 'স্পেশাল শাহী খাসির কাচ্চি বিরিয়ানি', price: 450, quantity: 2, costPrice: 240 }
                                 ],
@@ -4628,7 +4628,7 @@
                                 customerRef: 'কাউন্টার সেল',
                                 paymentMethod: 'Cash',
                                 foodCourtId: 'fc_burger',
-                                foodCourtName: 'বার্গার এক্সপ্রেস ফুডকোর্ট',
+                                foodCourtName: 'বার্গার এক্সপ্রেস ফুডকার্ট',
                                 items: [
                                     { id: 'b1', name: 'Naga Crispy Chicken Burger', nameBn: 'নাগা ক্রিস্পি চিকেন বার্গার', price: 260, quantity: 2, costPrice: 110 },
                                     { id: 'b3', name: 'Peri Peri French Fries', nameBn: 'পেরি পেরি মসলাদার ফ্রাই', price: 130, quantity: 1, costPrice: 45 }
@@ -4647,24 +4647,24 @@
 
                 getDefaultKacchiItems() {
                     return [
-                        { id: 'k1', name: 'Special Mutton Kacchi Biryani', nameBn: 'স্পেশাল শাহী খাসির কাচ্চি বিরিয়ানি', code: 'KB-01', category: 'biryani_rice', image: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=300&q=65&auto=format', costPrice: 240, price: 450, stock: 48, foodCourtId: 'fc_kacchi', foodCourtName: 'কাচ্চি বাড়ি ফুডকোর্ট' },
-                        { id: 'k2', name: 'Traditional Shahi Borhani', nameBn: 'ঐতিহ্যবাহী শাহী বোরহানি', code: 'KB-02', category: 'beverages_cha', image: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=300&q=65&auto=format', costPrice: 35, price: 90, stock: 65, foodCourtId: 'fc_kacchi', foodCourtName: 'কাচ্চি বাড়ি ফুডকোর্ট' },
-                        { id: 'k3', name: 'Old Dhaka Beef Tehari', nameBn: 'পুরান ঢাকার সরিষার তেলে বিফ তেহারি', code: 'KB-03', category: 'biryani_rice', image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=300&q=65&auto=format', costPrice: 180, price: 320, stock: 35, foodCourtId: 'fc_kacchi', foodCourtName: 'কাচ্চি বাড়ি ফুডকোর্ট' },
-                        { id: 'k4', name: 'Zafrani Shahi Firni', nameBn: 'জাফরানি শাহী ফিরনি (মাটির পাত্রে)', code: 'KB-04', category: 'sweets_falooda', image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=300&q=65&auto=format', costPrice: 40, price: 95, stock: 40, foodCourtId: 'fc_kacchi', foodCourtName: 'কাচ্চি বাড়ি ফুডকোর্ট' }
+                        { id: 'k1', name: 'Special Mutton Kacchi Biryani', nameBn: 'স্পেশাল শাহী খাসির কাচ্চি বিরিয়ানি', code: 'KB-01', category: 'biryani_rice', image: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=300&q=65&auto=format', costPrice: 240, price: 450, stock: 48, foodCourtId: 'fc_kacchi', foodCourtName: 'কাচ্চি বাড়ি ফুডকার্ট' },
+                        { id: 'k2', name: 'Traditional Shahi Borhani', nameBn: 'ঐতিহ্যবাহী শাহী বোরহানি', code: 'KB-02', category: 'beverages_cha', image: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=300&q=65&auto=format', costPrice: 35, price: 90, stock: 65, foodCourtId: 'fc_kacchi', foodCourtName: 'কাচ্চি বাড়ি ফুডকার্ট' },
+                        { id: 'k3', name: 'Old Dhaka Beef Tehari', nameBn: 'পুরান ঢাকার সরিষার তেলে বিফ তেহারি', code: 'KB-03', category: 'biryani_rice', image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=300&q=65&auto=format', costPrice: 180, price: 320, stock: 35, foodCourtId: 'fc_kacchi', foodCourtName: 'কাচ্চি বাড়ি ফুডকার্ট' },
+                        { id: 'k4', name: 'Zafrani Shahi Firni', nameBn: 'জাফরানি শাহী ফিরনি (মাটির পাত্রে)', code: 'KB-04', category: 'sweets_falooda', image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=300&q=65&auto=format', costPrice: 40, price: 95, stock: 40, foodCourtId: 'fc_kacchi', foodCourtName: 'কাচ্চি বাড়ি ফুডকার্ট' }
                     ];
                 },
 
                 getDefaultBurgerItems() {
                     return [
-                        { id: 'b1', name: 'Naga Crispy Chicken Burger', nameBn: 'নাগা ক্রিস্পি চিকেন বার্গার (চিজি)', code: 'BX-01', category: 'burgers_fastfood', image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=300&q=65&auto=format', costPrice: 110, price: 260, stock: 55, foodCourtId: 'fc_burger', foodCourtName: 'বার্গার এক্সপ্রেস ফুডকোর্ট' },
-                        { id: 'b2', name: 'Double Patty Smoky Beef Burger', nameBn: 'ডাবল প্যাটি স্মোকি বিফ বার্গার', code: 'BX-02', category: 'burgers_fastfood', image: 'https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=300&q=65&auto=format', costPrice: 160, price: 350, stock: 42, foodCourtId: 'fc_burger', foodCourtName: 'বার্গার এক্সপ্রেস ফুডকোর্ট' },
-                        { id: 'b3', name: 'Peri Peri French Fries', nameBn: 'পেরি পেরি মসলাদার ফ্রাই', code: 'BX-03', category: 'burgers_fastfood', image: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=300&q=65&auto=format', costPrice: 45, price: 130, stock: 70, foodCourtId: 'fc_burger', foodCourtName: 'বার্গার এক্সপ্রেস ফুডকোর্ট' },
-                        { id: 'b4', name: 'Oreo Chocolate Milkshake', nameBn: 'ওরিও ডার্ক চকলেট মিল্কশেক', code: 'BX-04', category: 'beverages_cha', image: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=300&q=65&auto=format', costPrice: 65, price: 180, stock: 30, foodCourtId: 'fc_burger', foodCourtName: 'বার্গার এক্সপ্রেস ফুডকোর্ট' }
+                        { id: 'b1', name: 'Naga Crispy Chicken Burger', nameBn: 'নাগা ক্রিস্পি চিকেন বার্গার (চিজি)', code: 'BX-01', category: 'burgers_fastfood', image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=300&q=65&auto=format', costPrice: 110, price: 260, stock: 55, foodCourtId: 'fc_burger', foodCourtName: 'বার্গার এক্সপ্রেস ফুডকার্ট' },
+                        { id: 'b2', name: 'Double Patty Smoky Beef Burger', nameBn: 'ডাবল প্যাটি স্মোকি বিফ বার্গার', code: 'BX-02', category: 'burgers_fastfood', image: 'https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=300&q=65&auto=format', costPrice: 160, price: 350, stock: 42, foodCourtId: 'fc_burger', foodCourtName: 'বার্গার এক্সপ্রেস ফুডকার্ট' },
+                        { id: 'b3', name: 'Peri Peri French Fries', nameBn: 'পেরি পেরি মসলাদার ফ্রাই', code: 'BX-03', category: 'burgers_fastfood', image: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=300&q=65&auto=format', costPrice: 45, price: 130, stock: 70, foodCourtId: 'fc_burger', foodCourtName: 'বার্গার এক্সপ্রেস ফুডকার্ট' },
+                        { id: 'b4', name: 'Oreo Chocolate Milkshake', nameBn: 'ওরিও ডার্ক চকলেট মিল্কশেক', code: 'BX-04', category: 'beverages_cha', image: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=300&q=65&auto=format', costPrice: 65, price: 180, stock: 30, foodCourtId: 'fc_burger', foodCourtName: 'বার্গার এক্সপ্রেস ফুডকার্ট' }
                     ];
                 },
 
                 saveSettings() {
-                    localStorage.setItem('khabarbari_settings', JSON.stringify(this.posSettings));
+                    localStorage.setItem('khabarbari_settings_v3', JSON.stringify(this.posSettings));
                 },
 
                 get lowStockCount() {
@@ -4902,7 +4902,7 @@
                         customerRef: this.customerRef || (this.lang === 'bn' ? 'কাউন্টার সেল' : 'Counter Sale'),
                         paymentMethod: paymentMethod, // 'Cash', 'bKash', or 'Nagad'
                         foodCourtId: item.foodCourtId || this.getEffectiveOwnerId() || 'fc_kacchi',
-                        foodCourtName: item.foodCourtName || (this.getEffectiveOwnerId() ? this.getOwnerById(this.getEffectiveOwnerId())?.shopName : null) || 'কাচ্চি বাড়ি ফুডকোর্ট',
+                        foodCourtName: item.foodCourtName || (this.getEffectiveOwnerId() ? this.getOwnerById(this.getEffectiveOwnerId())?.shopName : null) || 'কাচ্চি বাড়ি ফুডকার্ট',
                         items: [
                             { id: item.id, name: item.name, nameBn: item.nameBn || item.name, price: item.price, quantity: quantity, costPrice: item.costPrice }
                         ],
@@ -4954,7 +4954,7 @@
 
                     // Enforce Open Court check
                     if (!this.isCourtOpen) {
-                        this.showToast((this.lang === 'bn' ? 'কোর্ট বর্তমানে বন্ধ রয়েছে! বিক্রি করতে প্রথমে "ওপেন কোর্ট" করুন' : 'Court is closed! Please open court first'), '🔒', 'error');
+                        this.showToast((this.lang === 'bn' ? 'কার্ট বর্তমানে বন্ধ রয়েছে! বিক্রি করতে প্রথমে "ওপেন কার্ট" করুন' : 'Court is closed! Please open court first'), '🔒', 'error');
                         this.openCourtModal();
                         return;
                     }
@@ -4972,7 +4972,7 @@
                         customerRef: this.customerRef || (this.lang === 'bn' ? 'কাউন্টার গেস্ট' : 'Counter Guest'),
                         paymentMethod: this.paymentMethod || 'Cash',
                         foodCourtId: this.getEffectiveOwnerId() || (this.cart[0]?.foodCourtId || 'fc_kacchi'),
-                        foodCourtName: (this.getEffectiveOwnerId() ? this.getOwnerById(this.getEffectiveOwnerId())?.shopName : null) || (this.cart[0]?.foodCourtName || 'কাচ্চি বাড়ি ফুডকোর্ট'),
+                        foodCourtName: (this.getEffectiveOwnerId() ? this.getOwnerById(this.getEffectiveOwnerId())?.shopName : null) || (this.cart[0]?.foodCourtName || 'কাচ্চি বাড়ি ফুডকার্ট'),
                         items: JSON.parse(JSON.stringify(this.cart)),
                         itemsSummary: this.cart.map(i => `${i.nameBn || i.name} (x${i.quantity})`).join(', '),
                         totalQty: this.cart.reduce((s, i) => s + i.quantity, 0),
@@ -5037,7 +5037,7 @@
 
                 copyDigitalReceipt(order) {
                     if (!order) return;
-                    const storeName = (this.posSettings && this.posSettings.storeName) ? this.posSettings.storeName : 'খাবারবাড়ি ফুডকোর্ট';
+                    const storeName = (this.posSettings && this.posSettings.storeName) ? this.posSettings.storeName : 'খাবারবাড়ি ফুডকার্ট';
                     const hotline = (this.posSettings && this.posSettings.hotline) ? this.posSettings.hotline : '+880 1711-234567';
                     const memoId = order.orderId || 'MEMO';
                     const oTime = order.timestamp || '';
@@ -5765,7 +5765,7 @@
                             ...this.editingItem,
                             code: this.editingItem.code || ('KB-' + Math.floor(10 + Math.random() * 90)),
                             foodCourtId: activeOwner ? activeOwner.id : 'fc_kacchi',
-                            foodCourtName: activeOwner ? activeOwner.shopName : (this.posSettings.storeName || 'ফুডকোর্ট')
+                            foodCourtName: activeOwner ? activeOwner.shopName : (this.posSettings.storeName || 'ফুডকার্ট')
                         };
                         this.menuItems.unshift(newItem);
                     }
