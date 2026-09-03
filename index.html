@@ -4,10 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>খাবারবাড়ি POS & Admin | Enterprise Food Court OS</title>
-    <!-- Brand Favicon & Mobile Touch Icons -->
+    <!-- Brand Favicon, PWA Web App Manifest & Android Theme Color -->
     <link rel="icon" type="image/svg+xml" href="./favicon.svg">
-    <link rel="alternate icon" href="/favicon.svg?v=2">
-    <link rel="apple-touch-icon" href="/favicon.svg?v=2">
+    <link rel="alternate icon" href="./favicon.svg">
+    <link rel="apple-touch-icon" href="./favicon.svg">
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#10b981">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="FoodCourt POS">
     
     <!-- Google Fonts: Hind Siliguri, Plus Jakarta Sans, Inter, & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -346,6 +352,14 @@
                             <span x-text="lang === 'bn' ? 'ক্লোজ' : 'Close'"></span>
                         </button>
                     </template>
+
+                    <!-- 📲 Install Android App Button -->
+                    <button type="button" @click="triggerInstallApp(); playChime(600)" 
+                            class="px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-slate-950 text-[11px] font-black transition-all flex items-center gap-1 cursor-pointer active:scale-95 shadow-md shadow-emerald-500/20"
+                            :title="lang === 'bn' ? 'ফোনে সরাসরি অ্যাপ হিসেবে ইনস্টল করুন' : 'Install App on Phone'">
+                        <span>📲</span>
+                        <span class="hidden xs:inline" x-text="lang === 'bn' ? 'ইনস্টল অ্যাপ' : 'Install App'"></span>
+                    </button>
 
                     <!-- Language Switcher Button (Bangla <-> English) -->
                     <button type="button" @click="toggleLanguage(); playChime(520)" 
@@ -3580,6 +3594,26 @@
                 lang: 'bn',
                 viewMode: 'desktop', // 'desktop' or 'mobile'
                 mobileLayout: 'grid', // 'grid' or 'list'
+                deferredInstallPrompt: null,
+                showInstallAppBanner: true,
+
+                triggerInstallApp() {
+                    if (this.deferredInstallPrompt) {
+                        this.deferredInstallPrompt.prompt();
+                        this.deferredInstallPrompt.userChoice.then((choiceResult) => {
+                            if (choiceResult.outcome === 'accepted') {
+                                this.showToast(this.lang === 'bn' ? '🎉 অ্যাপ সফলভাবে ফোনে ইনস্টল হচ্ছে!' : '🎉 App installing on phone!');
+                                this.showInstallAppBanner = false;
+                            }
+                            this.deferredInstallPrompt = null;
+                        });
+                    } else {
+                        // Fallback manual instructions
+                        alert(this.lang === 'bn' 
+                            ? 'অ্যান্ড্রয়েড ফোনে সরাসরি ইনস্টল করতে:\n\n১. আপনার গুগল ক্রোম ব্রাউজারের উপরে ডানদিকের তিনটি ডটে (⋮) চাপ দিন।\n২. "Install app" বা "Add to Home screen" এ চাপ দিন।\n\nতাহলে এটি সরাসরি ফোনে অ্যাপ হিসেবে সেভ হয়ে যাবে এবং ইন্টারনেট ছাড়াও চলবে।' 
+                            : 'To install on Android:\n\n1. Tap the 3 dots (⋮) in Chrome.\n2. Select "Install app" or "Add to Home screen".\n\nThe app will be installed on your phone home screen and will work 100% offline.');
+                    }
+                },
                 activeTab: 'pos',
                 posFastSaleMode: true, // 1-Tap Fast Sale without manual inputs
                 salesRevision: 0, // Reactive trigger for instant sum updates
@@ -4011,6 +4045,22 @@
                     this.updateTime();
                     setInterval(() => this.updateTime(), 1000);
                     this.loadStoredData();
+
+                    // Register Offline-First Service Worker
+                    if ('serviceWorker' in navigator) {
+                        navigator.serviceWorker.register('./sw.js').then((reg) => {
+                            console.log('[PWA] Service Worker active! App works 100% offline.');
+                        }).catch((err) => {
+                            console.log('[PWA] Service worker registration error:', err);
+                        });
+                    }
+
+                    // Android 1-Click Install App / APK Prompt
+                    window.addEventListener('beforeinstallprompt', (e) => {
+                        e.preventDefault();
+                        this.deferredInstallPrompt = e;
+                        this.showInstallAppBanner = true;
+                    });
                 },
 
                 updateTime() {
