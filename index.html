@@ -6152,7 +6152,7 @@
     </script>
 
     <!-- Floating APK Download Button (Bottom Right) -->
-    <a href="/FoodCourtPOS.apk" download="FoodCourtPOS.apk" 
+    <a href="./FoodCourtPOS.apk" download="FoodCourtPOS.apk" 
        class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 px-4 py-3 sm:px-5 sm:py-3.5 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 text-slate-950 font-black text-xs sm:text-sm shadow-xl shadow-emerald-500/30 flex items-center gap-2 cursor-pointer transition-all active:scale-95 group border border-emerald-400/50 backdrop-blur-md">
         <div class="relative flex items-center justify-center">
             <span class="text-lg sm:text-xl relative z-10 group-hover:-translate-y-0.5 transition-transform">⬇️</span>
