@@ -332,6 +332,13 @@
                                 <span>•</span>
                                 <span class="text-amber-400 font-bold truncate" x-text="currentUserRole === 'superadmin' ? (lang === 'bn' ? 'মেইন অ্যাডমিন' : 'Main Admin') : (currentUserRole === 'owner' ? (adminUser.stallNo || (lang === 'bn' ? 'স্টল মালিক' : 'Stall Owner')) : (lang === 'bn' ? 'খাবারবাড়ি OS' : 'KhabarBari OS'))"></span>
                             </div>
+
+                            <!-- Dedicated APK Download Button -->
+                            <a href="./FoodCourtPOS.apk" download="FoodCourtPOS.apk" 
+                               class="mt-1.5 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 text-[9px] sm:text-[10px] font-black uppercase tracking-wide cursor-pointer transition-colors w-fit">
+                                <span class="text-xs">⬇️</span>
+                                <span x-text="lang === 'bn' ? 'অফলাইন APK ডাউনলোড' : 'Download Offline APK'"></span>
+                            </a>
                         </div>
                     </div>
 
@@ -6151,20 +6158,7 @@
         }
     </script>
 
-    <!-- Scrolling APK Download Button (Bottom of page) -->
-    <div class="flex justify-center mt-6 w-full">
-        <a href="./FoodCourtPOS.apk" download="FoodCourtPOS.apk" 
-           class="px-5 py-3.5 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 text-slate-950 font-black text-sm shadow-xl shadow-emerald-500/30 flex items-center gap-2 cursor-pointer transition-all active:scale-95 group border border-emerald-400/50 backdrop-blur-md">
-        <div class="relative flex items-center justify-center">
-            <span class="text-lg sm:text-xl relative z-10 group-hover:-translate-y-0.5 transition-transform">⬇️</span>
-            <span class="absolute inset-0 bg-emerald-300 rounded-full blur-md opacity-0 group-hover:opacity-50 transition-opacity"></span>
-        </div>
-        <div class="flex flex-col">
-            <span class="uppercase tracking-wide text-[9px] sm:text-[10px] opacity-80 leading-none mb-0.5" x-text="lang === 'bn' ? 'অফলাইন অ্যাপ' : 'OFFLINE APP'"></span>
-            <span class="leading-none tracking-tight" x-text="lang === 'bn' ? 'APK ডাউনলোড' : 'Download APK'"></span>
-        </div>
-    </a>
-    </div>
+
 
 </body>
 </html>
