@@ -474,70 +474,7 @@
             
             <div class="w-full space-y-3 sm:space-y-4">
 
-                <!-- 📲 1-CLICK APP INSTALLATION BANNER (Official Android PWA WebAPK) -->
-                <div class="p-2 sm:px-4 sm:py-3 rounded-2xl border flex items-center justify-between gap-2 shadow-lg transition-all"
-                     :class="isDark ? 'bg-gradient-to-r from-emerald-950/40 via-obsidian-900 to-teal-950/40 border-emerald-500/20 text-emerald-200 backdrop-blur-md' : 'bg-gradient-to-r from-emerald-50 to-teal-50 border-emerald-200 text-emerald-950 backdrop-blur-md'">
-                    <div class="flex items-center gap-2 overflow-hidden">
-                        <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-lg sm:text-xl flex-shrink-0">
-                            📲
-                        </div>
-                        <div class="min-w-0 flex-1">
-                            <h4 class="font-black text-[11px] sm:text-sm truncate" x-text="lang === 'bn' ? 'অ্যান্ড্রয়েড অ্যাপ ১-ক্লিকে ইনস্টল' : 'Install Official Android App'"></h4>
-                            <p class="text-[9px] sm:text-[11px] opacity-80 truncate" x-text="lang === 'bn' ? 'অফলাইন ও অনলাইন সাপোর্টেড' : 'Works offline & online directly'"></p>
-                        </div>
-                    </div>
-                    <button type="button" @click="triggerInstallApp(); playChime(650)"
-                            class="flex-shrink-0 px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 text-slate-950 font-black text-[10px] sm:text-xs shadow-md shadow-emerald-500/25 active:scale-95 transition-all flex items-center gap-1 cursor-pointer">
-                        <span>⚡</span>
-                        <span x-text="lang === 'bn' ? 'ইনস্টল' : 'Install'"></span>
-                    </button>
-                </div>
 
-                <!-- COURT OPERATIONAL STATUS ALERT BANNER (Open Court / Close Court) -->
-                <!-- State A: Court Closed Banner -->
-                <div x-show="!isCourtOpen" 
-                     class="p-3 sm:p-4 rounded-2xl border shadow-xl flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 transition-all relative overflow-hidden"
-                     :class="isDark ? 'bg-gradient-to-br from-amber-950/40 to-rose-950/20 border-amber-500/30 text-amber-200' : 'bg-gradient-to-br from-amber-50 to-orange-50 border-amber-300 text-amber-950'">
-                    <!-- Subtle decorative background glow -->
-                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
-                    <div class="flex flex-col sm:flex-row items-center sm:items-start gap-3 w-full sm:w-auto text-center sm:text-left z-10">
-                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-amber-500/20 to-rose-500/20 text-amber-400 border border-amber-500/40 flex items-center justify-center text-xl sm:text-2xl font-black flex-shrink-0 shadow-sm mx-auto sm:mx-0">
-                            🔒
-                        </div>
-                        <div>
-                            <div class="flex flex-col sm:flex-row items-center gap-1.5 sm:gap-2 justify-center sm:justify-start">
-                                <h3 class="font-black text-[13px] sm:text-base tracking-tight" x-text="lang === 'bn' ? 'কার্ট বর্তমানে বন্ধ রয়েছে' : 'Cart is Closed'"></h3>
-                                <span class="px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-black bg-rose-500/20 text-rose-500 border border-rose-500/30" x-text="lang === 'bn' ? 'বিক্রি বন্ধ' : 'Sales Paused'"></span>
-                            </div>
-                            <p class="text-[10px] sm:text-xs opacity-80 mt-1" x-text="lang === 'bn' ? 'বিক্রয় শুরু করতে ওপেন কার্ট করুন' : 'Open cart to begin today\'s sales'"></p>
-                        </div>
-                    </div>
-                    <button type="button" @click="openCourtModal()"
-                            class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 text-slate-950 font-black text-[11px] sm:text-sm shadow-lg shadow-emerald-500/30 active:scale-95 transition-all flex items-center justify-center gap-1.5 cursor-pointer z-10">
-                        <span class="text-sm sm:text-base">🟢</span>
-                        <span x-text="lang === 'bn' ? 'ওপেন কার্ট' : 'Open Cart'"></span>
-                    </button>
-                </div>
-
-                <!-- State B: Court Open Active Banner -->
-                <div x-show="isCourtOpen"
-                     class="px-4 py-2.5 rounded-2xl border flex flex-wrap items-center justify-between gap-2.5 text-xs font-bold transition-all shadow-sm"
-                     :class="isDark ? 'bg-emerald-950/40 border-emerald-500/30 text-emerald-300' : 'bg-emerald-50 border-emerald-200 text-emerald-900'">
-                    <div class="flex items-center gap-2 min-w-0">
-                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse flex-shrink-0"></span>
-                        <span class="truncate">
-                            <strong x-text="lang === 'bn' ? 'কার্ট সেশন চালু রয়েছে' : 'Cart Session is Active'"></strong>
-                            <span x-show="courtSession.openedAt" class="opacity-80 font-mono" x-text="' (আজ ' + courtSession.openedAt + ' থেকে খোলা)'"></span>
-                            <span class="hidden md:inline opacity-75 font-normal" x-text="lang === 'bn' ? '• সকল বিক্রয় মেমো সফলভাবে রেকর্ড হচ্ছে' : '• Sales and receipts are recording live'"></span>
-                        </span>
-                    </div>
-                    <button type="button" @click="openCloseCourtModal()"
-                            class="px-3.5 py-1.5 rounded-xl bg-rose-500/20 hover:bg-rose-500/30 text-rose-400 border border-rose-500/40 text-xs font-black cursor-pointer active:scale-95 transition-all flex items-center gap-1.5 shadow-sm">
-                        <span>🔴</span>
-                        <span x-text="lang === 'bn' ? 'ক্লোজ কার্ট (দিন সমাপ্ত ও Z-Report)' : 'Close Cart (End Day & Z-Report)'"></span>
-                    </button>
-                </div>
-                    
                     <!-- Food Menu Header & Owner Action Bar -->
                     <div class="p-2.5 rounded-2xl border flex flex-wrap items-center justify-between gap-2 transition-all shadow-sm"
                          :class="isDark ? 'glass-panel-dark border-white/[0.08]' : 'glass-panel-light border-slate-200/90'">
