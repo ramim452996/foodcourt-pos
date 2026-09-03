@@ -353,12 +353,21 @@
                         </button>
                     </template>
 
-                    <!-- 📲 Install Android App Button -->
+                    <!-- 🤖 Direct 1-Click Download Android APK Button -->
+                    <a href="./FoodCourtPOS.apk" download="FoodCourtPOS.apk" @click="playChime(700)"
+                       class="px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-400 via-teal-500 to-emerald-600 text-slate-950 text-[11px] font-black transition-all flex items-center gap-1.5 cursor-pointer active:scale-95 shadow-md shadow-emerald-500/30 ring-1 ring-emerald-300"
+                       :title="lang === 'bn' ? '১-ক্লিকে অ্যান্ড্রয়েড APK ডাউনলোড করুন' : '1-Click Direct Android APK Download'">
+                        <span class="text-xs">🤖</span>
+                        <span class="tracking-tight" x-text="lang === 'bn' ? 'APK ডাউনলোড' : 'Download APK'"></span>
+                    </a>
+
+                    <!-- 📲 Install Android PWA Button -->
                     <button type="button" @click="triggerInstallApp(); playChime(600)" 
-                            class="px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-slate-950 text-[11px] font-black transition-all flex items-center gap-1 cursor-pointer active:scale-95 shadow-md shadow-emerald-500/20"
-                            :title="lang === 'bn' ? 'ফোনে সরাসরি অ্যাপ হিসেবে ইনস্টল করুন' : 'Install App on Phone'">
+                            class="px-2.5 py-1.5 rounded-xl border text-[11px] font-black transition-all flex items-center gap-1 cursor-pointer active:scale-95 shadow-sm"
+                            :class="isDark ? 'bg-zinc-800 hover:bg-zinc-700 text-emerald-400 border-zinc-700' : 'bg-slate-100 hover:bg-slate-200 text-emerald-700 border-slate-200'"
+                            :title="lang === 'bn' ? 'হোমস্ক্রিনে ইনস্টল করুন' : 'Install App on Phone'">
                         <span>📲</span>
-                        <span class="hidden xs:inline" x-text="lang === 'bn' ? 'ইনস্টল অ্যাপ' : 'Install App'"></span>
+                        <span class="hidden sm:inline" x-text="lang === 'bn' ? 'ইনস্টল' : 'Install'"></span>
                     </button>
 
                     <!-- Language Switcher Button (Bangla <-> English) -->
@@ -451,6 +460,27 @@
         <main x-show="activeTab === 'pos'" class="flex-1 space-y-3 sm:space-y-4">
             
             <div class="w-full space-y-3 sm:space-y-4">
+
+                <!-- 🤖 DIRECT ANDROID APK DOWNLOAD BANNER (1-Click Free Download) -->
+                <div class="px-4 py-3 rounded-2xl border flex flex-wrap items-center justify-between gap-3 shadow-lg transition-all"
+                     :class="isDark ? 'bg-gradient-to-r from-emerald-950/60 via-obsidian-950 to-teal-950/60 border-emerald-500/30 text-emerald-200' : 'bg-gradient-to-r from-emerald-50 to-teal-50 border-emerald-200 text-emerald-950'">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-xl flex-shrink-0">
+                            🤖
+                        </div>
+                        <div>
+                            <h4 class="font-black text-xs sm:text-sm" x-text="lang === 'bn' ? 'অ্যান্ড্রয়েড ফোন অ্যাপ (APK) ফ্রি ডাউনলোড' : 'Android App (APK) Free Download'"></h4>
+                            <p class="text-[11px] opacity-80" x-text="lang === 'bn' ? 'ইন্টারনেট ছাড়া এবং ইন্টারনেট সহ উভয়ভাবেই ফোন থেকে দ্রুত বিক্রয় ও হিসাব রাখার জন্য প্রস্তুত।' : 'Works 100% offline and online directly on your mobile device.'"></p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <a href="./FoodCourtPOS.apk" download="FoodCourtPOS.apk" @click="playChime(650)"
+                           class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs shadow-md shadow-emerald-500/25 active:scale-95 transition-all flex items-center gap-1.5">
+                            <span>📥</span>
+                            <span x-text="lang === 'bn' ? 'সরাসরি APK ডাউনলোড করুন' : 'Download APK File'"></span>
+                        </a>
+                    </div>
+                </div>
 
                 <!-- COURT OPERATIONAL STATUS ALERT BANNER (Open Court / Close Court) -->
                 <!-- State A: Court Closed Banner -->
