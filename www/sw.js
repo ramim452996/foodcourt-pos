@@ -1,5 +1,5 @@
 // Service Worker for 100% Offline & Online Food Court POS
-const CACHE_NAME = 'foodcourt-pos-v5';
+const CACHE_NAME = 'foodcourt-pos-v8';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
