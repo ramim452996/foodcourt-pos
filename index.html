@@ -653,19 +653,11 @@
                                                                     <span class="text-[10px] text-slate-400 font-sans font-bold">পরিমাণ:</span>
                                                                     <div class="flex items-center rounded-lg border border-white/10 overflow-hidden"
                                                                          :class="isDark ? 'bg-zinc-900' : 'bg-white'">
-                                                                        <button type="button" @click="stepItemSaleQty(item.id, -1); playChime(350)" class="w-7 h-7 flex items-center justify-center text-xs font-bold text-zinc-300 hover:text-white hover:bg-white/10 active:scale-95 transition-all">-</button>
-                                                                        <span class="w-5 text-center font-bold font-mono text-emerald-400 text-xs" x-text="getItemSaleQty(item.id)"></span>
-                                                                        <button type="button" @click="stepItemSaleQty(item.id, 1); playChime(450)" class="w-5 h-5 flex items-center justify-center text-xs font-bold text-zinc-300 hover:text-white hover:bg-white/10 active:scale-95 transition-all">+</button>
+                                                                        <button type="button" @click="stepItemSaleQty(item.id, -1); playChime(350)" class="w-7 h-7 flex items-center justify-center text-sm font-black text-zinc-300 hover:text-white hover:bg-white/10 active:scale-95 transition-all">-</button>
+                                                                        <span class="w-7 text-center font-bold font-mono text-emerald-400 text-xs" x-text="getItemSaleQty(item.id)"></span>
+                                                                        <button type="button" @click="stepItemSaleQty(item.id, 1); playChime(450)" class="w-7 h-7 flex items-center justify-center text-sm font-black text-zinc-300 hover:text-white hover:bg-white/10 active:scale-95 transition-all">+</button>
                                                                     </div>
-                                                                    <!-- Fast Presets: 2 & 5 -->
-                                                                    <div class="flex items-center gap-0.5 ml-0.5">
-                                                                        <button type="button" @click="setItemSaleQty(item.id, 2); playChime(400)" 
-                                                                                :class="getItemSaleQty(item.id) === 2 ? 'bg-emerald-500 text-slate-950 font-black' : (isDark ? 'bg-zinc-800 text-zinc-300' : 'bg-slate-200 text-slate-700')"
-                                                                                class="px-1.5 py-0.5 rounded text-[10px] font-bold">২</button>
-                                                                        <button type="button" @click="setItemSaleQty(item.id, 5); playChime(400)" 
-                                                                                :class="getItemSaleQty(item.id) === 5 ? 'bg-emerald-500 text-slate-950 font-black' : (isDark ? 'bg-zinc-800 text-zinc-300' : 'bg-slate-200 text-slate-700')"
-                                                                                class="px-1.5 py-0.5 rounded text-[10px] font-bold">৫</button>
-                                                                    </div>
+
                                                                 </div>
                                                                 <div class="text-right font-mono">
                                                                     <span class="text-[9px] text-slate-400 block leading-none font-sans">মোট</span>
