@@ -288,77 +288,99 @@
                 :class="isDark ? 'bg-obsidian-950/90 border-white/[0.08] shadow-black/40 text-white' : 'bg-white/95 border-slate-200/90 shadow-slate-200/60 text-slate-900'">
             
             <!-- Top Line: Brand Emblem, Stall Title, Time, and Status Actions -->
-            <div class="flex items-center justify-between gap-2">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
                 
-                <!-- Left: Luxury Brand Badge & Stall Identification -->
-                <div class="flex items-center gap-2.5 min-w-0 flex-1">
-                    <!-- Cloche Luxury Crown Insignia -->
-                    <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-600 via-teal-700 to-emerald-900 p-[1.5px] shadow-md shadow-emerald-500/20 ring-1 ring-emerald-400/40 flex-shrink-0 cursor-pointer active:scale-95 transition-transform"
-                         @click="activeTab = 'pos'">
-                        <div class="w-full h-full rounded-[14px] bg-gradient-to-br from-obsidian-900 via-emerald-950 to-zinc-950 flex items-center justify-center text-lg">
-                            👑
+                <!-- Left / Row 1: Luxury Brand Badge & Stall Dropdown Switcher -->
+                <div class="flex items-center justify-between gap-2.5 min-w-0 w-full sm:w-auto">
+                    <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                        <!-- Cloche Luxury Crown Insignia -->
+                        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-600 via-teal-700 to-emerald-900 p-[1.5px] shadow-md shadow-emerald-500/20 ring-1 ring-emerald-400/40 flex-shrink-0 cursor-pointer active:scale-95 transition-transform"
+                             @click="activeTab = 'pos'">
+                            <div class="w-full h-full rounded-[14px] bg-gradient-to-br from-obsidian-900 via-emerald-950 to-zinc-950 flex items-center justify-center text-lg">
+                                👑
+                            </div>
+                        </div>
+
+                        <div class="min-w-0 flex-1">
+                            <!-- Main Title / Stall Dropdown Selector -->
+                            <div class="flex items-center gap-1.5 min-w-0">
+                                <!-- Super Admin Dropdown Switcher (Clean & Non-overlapping) -->
+                                <template x-if="currentUserRole === 'superadmin'">
+                                    <div class="relative inline-flex items-center max-w-full">
+                                        <select x-model="adminViewingOwnerId" @change="adminSwitchToOwner(adminViewingOwnerId)" 
+                                                class="text-xs sm:text-sm font-black bg-emerald-500/10 dark:bg-emerald-950/40 text-amber-500 dark:text-amber-400 border border-amber-500/30 rounded-xl px-2.5 py-1 cursor-pointer focus:ring-1 focus:ring-amber-400 max-w-[210px] sm:max-w-[260px] truncate shadow-xs">
+                                            <option value="all" class="bg-zinc-900 text-amber-400" x-text="lang === 'bn' ? '🌐 সকল ফুডকার্ট (সম্মিলিত)' : '🌐 All Food Courts (Combined)'"></option>
+                                            <template x-for="owner in ownerAccounts" :key="owner.id">
+                                                <option :value="owner.id" class="bg-zinc-900 text-white" x-text="owner.shopName"></option>
+                                            </template>
+                                        </select>
+                                    </div>
+                                </template>
+
+                                <!-- Individual Stall Owner Title -->
+                                <template x-if="currentUserRole !== 'superadmin'">
+                                    <h1 class="text-xs sm:text-sm font-black text-slate-900 dark:text-white truncate" x-text="getActiveFoodCourtTitle()"></h1>
+                                </template>
+                            </div>
+
+                            <!-- Subtitle: Live Dhaka Clock + Role / Stall Status -->
+                            <div class="text-[10px] font-mono flex items-center gap-1.5 text-slate-400 mt-0.5">
+                                <span class="inline-flex items-center gap-1 text-emerald-500 font-bold">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                                    <span x-text="currentDhakaTime"></span>
+                                </span>
+                                <span>•</span>
+                                <span class="text-amber-400 font-bold truncate" x-text="currentUserRole === 'superadmin' ? (lang === 'bn' ? 'মেইন অ্যাডমিন' : 'Main Admin') : (currentUserRole === 'owner' ? (adminUser.stallNo || (lang === 'bn' ? 'স্টল মালিক' : 'Stall Owner')) : (lang === 'bn' ? 'খাবারবাড়ি OS' : 'KhabarBari OS'))"></span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="min-w-0 flex-1">
-                        <!-- Main Title / Stall Name -->
-                        <div class="flex items-center gap-1.5 min-w-0">
-                            <!-- Super Admin Dropdown Switcher -->
-                            <template x-if="currentUserRole === 'superadmin'">
-                                <div class="relative flex items-center min-w-0 max-w-full">
-                                    <select x-model="adminViewingOwnerId" @change="adminSwitchToOwner(adminViewingOwnerId)" 
-                                            class="text-xs font-black bg-transparent border-0 focus:ring-0 cursor-pointer p-0 text-amber-400 max-w-[170px] truncate pr-4">
-                                        <option value="all" class="bg-zinc-900 text-amber-400" x-text="lang === 'bn' ? '🌐 সকল ফুডকার্ট (সম্মিলিত)' : '🌐 All Food Courts (Combined)'"></option>
-                                        <template x-for="owner in ownerAccounts" :key="owner.id">
-                                            <option :value="owner.id" class="bg-zinc-900 text-white" x-text="owner.shopName"></option>
-                                        </template>
-                                    </select>
-                                    <span class="text-[8px] text-amber-400 -ml-3 pointer-events-none">▼</span>
-                                </div>
-                            </template>
-
-                            <!-- Individual Stall Owner Title -->
-                            <template x-if="currentUserRole !== 'superadmin'">
-                                <h1 class="text-xs sm:text-sm font-black text-slate-900 dark:text-white truncate" x-text="getActiveFoodCourtTitle()"></h1>
-                            </template>
-                        </div>
-
-                        <!-- Subtitle: Live Dhaka Clock + Role / Stall Status -->
-                        <div class="text-[10px] font-mono flex items-center gap-1.5 text-slate-400 mt-0.5">
-                            <span class="inline-flex items-center gap-1 text-emerald-500 font-bold">
-                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                                <span x-text="currentDhakaTime"></span>
-                            </span>
-                            <span>•</span>
-                            <span class="text-amber-400 font-bold truncate" x-text="currentUserRole === 'superadmin' ? (lang === 'bn' ? 'মেইন অ্যাডমিন কন্ট্রোল' : 'Main Admin Control') : (currentUserRole === 'owner' ? (adminUser.stallNo || (lang === 'bn' ? 'স্টল মালিক' : 'Stall Owner')) : (lang === 'bn' ? 'খাবারবাড়ি OS' : 'KhabarBari OS'))"></span>
-                        </div>
+                    <!-- Mobile-Only Compact Status Badge (if screen is tight) -->
+                    <div class="sm:hidden flex items-center gap-1">
+                        <!-- Open / Close Quick Action -->
+                        <template x-if="!isCourtOpen">
+                            <button type="button" @click="openCourtModal()"
+                                    class="px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-slate-950 font-black text-[11px] shadow-sm flex items-center gap-1 cursor-pointer active:scale-95">
+                                <span>🟢</span>
+                                <span x-text="lang === 'bn' ? 'ওপেন' : 'Open'"></span>
+                            </button>
+                        </template>
+                        <template x-if="isCourtOpen">
+                            <button type="button" @click="openCloseCourtModal()"
+                                    class="px-2.5 py-1.5 rounded-xl bg-rose-500/20 text-rose-400 border border-rose-500/40 font-black text-[11px] flex items-center gap-1 cursor-pointer active:scale-95">
+                                <span>🔴</span>
+                                <span x-text="lang === 'bn' ? 'ক্লোজ' : 'Close'"></span>
+                            </button>
+                        </template>
                     </div>
                 </div>
 
-                <!-- Right: Open/Close Court Action & Theme Toggle -->
-                <div class="flex items-center gap-1.5 flex-shrink-0">
-                    <!-- Live Operational Status Toggle Button -->
-                    <template x-if="!isCourtOpen">
-                        <button type="button" @click="openCourtModal()"
-                                class="px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 text-slate-950 font-black text-[11px] shadow-sm flex items-center gap-1 cursor-pointer active:scale-95 transition-all">
-                            <span>🟢</span>
-                            <span x-text="lang === 'bn' ? 'ওপেন' : 'Open'"></span>
-                        </button>
-                    </template>
-                    <template x-if="isCourtOpen">
-                        <button type="button" @click="openCloseCourtModal()"
-                                class="px-2.5 py-1.5 rounded-xl bg-rose-500/20 hover:bg-rose-500/30 text-rose-400 border border-rose-500/40 font-black text-[11px] flex items-center gap-1 cursor-pointer active:scale-95 transition-all">
-                            <span>🔴</span>
-                            <span x-text="lang === 'bn' ? 'ক্লোজ' : 'Close'"></span>
-                        </button>
-                    </template>
+                <!-- Right / Action Toolbar: Buttons in a neat, wrap-safe row with clear spacing -->
+                <div class="flex items-center flex-wrap gap-1.5 justify-end w-full sm:w-auto pt-1 sm:pt-0 border-t sm:border-t-0 border-white/[0.06]">
+                    <!-- Desktop Open / Close Toggle (hidden on mobile since it's in top row) -->
+                    <div class="hidden sm:flex items-center">
+                        <template x-if="!isCourtOpen">
+                            <button type="button" @click="openCourtModal()"
+                                    class="px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 text-slate-950 font-black text-[11px] shadow-sm flex items-center gap-1 cursor-pointer active:scale-95 transition-all">
+                                <span>🟢</span>
+                                <span x-text="lang === 'bn' ? 'ওপেন' : 'Open'"></span>
+                            </button>
+                        </template>
+                        <template x-if="isCourtOpen">
+                            <button type="button" @click="openCloseCourtModal()"
+                                    class="px-2.5 py-1.5 rounded-xl bg-rose-500/20 hover:bg-rose-500/30 text-rose-400 border border-rose-500/40 font-black text-[11px] flex items-center gap-1 cursor-pointer active:scale-95 transition-all">
+                                <span>🔴</span>
+                                <span x-text="lang === 'bn' ? 'ক্লোজ' : 'Close'"></span>
+                            </button>
+                        </template>
+                    </div>
 
                     <!-- 🤖 Direct 1-Click Download Android APK Button -->
                     <a href="./FoodCourtPOS.apk" download="FoodCourtPOS.apk" @click="playChime(700)"
-                       class="px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-400 via-teal-500 to-emerald-600 text-slate-950 text-[11px] font-black transition-all flex items-center gap-1.5 cursor-pointer active:scale-95 shadow-md shadow-emerald-500/30 ring-1 ring-emerald-300"
+                       class="px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-400 via-teal-500 to-emerald-600 text-slate-950 text-[11px] font-black transition-all flex items-center gap-1 cursor-pointer active:scale-95 shadow-md shadow-emerald-500/30 ring-1 ring-emerald-300"
                        :title="lang === 'bn' ? '১-ক্লিকে অ্যান্ড্রয়েড APK ডাউনলোড করুন' : '1-Click Direct Android APK Download'">
                         <span class="text-xs">🤖</span>
-                        <span class="tracking-tight" x-text="lang === 'bn' ? 'APK ডাউনলোড' : 'Download APK'"></span>
+                        <span x-text="lang === 'bn' ? 'APK' : 'APK'"></span>
                     </a>
 
                     <!-- 📲 Install Android PWA Button -->
@@ -367,12 +389,12 @@
                             :class="isDark ? 'bg-zinc-800 hover:bg-zinc-700 text-emerald-400 border-zinc-700' : 'bg-slate-100 hover:bg-slate-200 text-emerald-700 border-slate-200'"
                             :title="lang === 'bn' ? 'হোমস্ক্রিনে ইনস্টল করুন' : 'Install App on Phone'">
                         <span>📲</span>
-                        <span class="hidden sm:inline" x-text="lang === 'bn' ? 'ইনস্টল' : 'Install'"></span>
+                        <span class="hidden xs:inline" x-text="lang === 'bn' ? 'ইনস্টল' : 'Install'"></span>
                     </button>
 
                     <!-- Language Switcher Button (Bangla <-> English) -->
                     <button type="button" @click="toggleLanguage(); playChime(520)" 
-                            class="px-2.5 py-1.5 rounded-xl border text-[11px] font-black transition-all flex items-center gap-1.5 cursor-pointer active:scale-95 shadow-sm"
+                            class="px-2.5 py-1.5 rounded-xl border text-[11px] font-black transition-all flex items-center gap-1 cursor-pointer active:scale-95 shadow-sm"
                             :class="isDark ? 'bg-zinc-800 hover:bg-zinc-700 text-amber-300 border-zinc-700' : 'bg-slate-100 hover:bg-slate-200 text-amber-700 border-slate-200'"
                             :title="lang === 'bn' ? 'Switch to English' : 'বাংলা ভাষায় পরিবর্তন করুন'">
                         <span class="text-xs" x-text="lang === 'bn' ? '🇧🇩' : '🇬🇧'"></span>
@@ -381,16 +403,15 @@
 
                     <!-- Desktop / Mobile View Switcher Button -->
                     <button type="button" @click="viewMode = (viewMode === 'mobile' ? 'desktop' : 'mobile'); playChime(500)" 
-                            class="px-2.5 py-1.5 rounded-xl border text-[11px] font-black transition-all flex items-center gap-1 cursor-pointer active:scale-95"
+                            class="px-2 py-1.5 rounded-xl border text-[11px] font-black transition-all flex items-center gap-1 cursor-pointer active:scale-95"
                             :class="viewMode === 'mobile' ? (isDark ? 'bg-zinc-800 hover:bg-zinc-700 text-emerald-400 border-zinc-700' : 'bg-slate-100 hover:bg-slate-200 text-emerald-700 border-slate-200') : 'bg-emerald-500 text-slate-950 font-black shadow-sm'"
-                            :title="viewMode === 'mobile' ? 'ডেস্কটপ ভিউতে সুইচ করুন (Switch to Desktop View)' : 'মোবাইল ভিউতে সুইচ করুন (Switch to Mobile View)'">
+                            :title="viewMode === 'mobile' ? 'ডেস্কটপ ভিউতে সুইচ করুন' : 'মোবাইল ভিউতে সুইচ করুন'">
                         <span x-text="viewMode === 'mobile' ? '💻' : '📱'"></span>
-                        <span class="hidden sm:inline" x-text="viewMode === 'mobile' ? 'ডেস্কটপ' : 'মোবাইল'"></span>
                     </button>
 
                     <!-- Dark / Light Mode Toggle Button -->
                     <button type="button" @click="toggleTheme()" 
-                            class="w-8 h-8 rounded-xl border flex items-center justify-center text-xs transition-colors cursor-pointer active:scale-95"
+                            class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl border flex items-center justify-center text-xs transition-colors cursor-pointer active:scale-95"
                             :class="isDark ? 'bg-zinc-800 text-amber-400 border-zinc-700' : 'bg-slate-100 text-slate-700 border-slate-200'"
                             title="Dark / Light Theme">
                         <span x-text="isDark ? '🌙' : '☀️'"></span>
