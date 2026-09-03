@@ -1,5 +1,5 @@
 // Service Worker for 100% Offline & Online Food Court POS
-const CACHE_NAME = 'foodcourt-pos-v4';
+const CACHE_NAME = 'foodcourt-pos-v5';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -39,8 +39,8 @@ self.addEventListener('activate', (event) => {
 
 // Fetch: Stale-While-Revalidate Strategy (Works 100% Offline + Updates when Online)
 self.addEventListener('fetch', (event) => {
-  // Only handle GET requests
-  if (event.request.method !== 'GET') return;
+  // Only handle GET requests and skip APK files
+  if (event.request.method !== 'GET' || event.request.url.endsWith('.apk')) return;
 
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
