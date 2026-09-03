@@ -347,13 +347,22 @@
                         </button>
                     </template>
 
+                    <!-- Language Switcher Button (Bangla <-> English) -->
+                    <button type="button" @click="toggleLanguage(); playChime(520)" 
+                            class="px-2.5 py-1.5 rounded-xl border text-[11px] font-black transition-all flex items-center gap-1.5 cursor-pointer active:scale-95 shadow-sm"
+                            :class="isDark ? 'bg-zinc-800 hover:bg-zinc-700 text-amber-300 border-zinc-700' : 'bg-slate-100 hover:bg-slate-200 text-amber-700 border-slate-200'"
+                            :title="lang === 'bn' ? 'Switch to English' : 'বাংলা ভাষায় পরিবর্তন করুন'">
+                        <span class="text-xs" x-text="lang === 'bn' ? '🇧🇩' : '🇬🇧'"></span>
+                        <span class="font-mono uppercase font-black" x-text="lang === 'bn' ? 'বাং' : 'EN'"></span>
+                    </button>
+
                     <!-- Desktop / Mobile View Switcher Button -->
                     <button type="button" @click="viewMode = (viewMode === 'mobile' ? 'desktop' : 'mobile'); playChime(500)" 
                             class="px-2.5 py-1.5 rounded-xl border text-[11px] font-black transition-all flex items-center gap-1 cursor-pointer active:scale-95"
                             :class="viewMode === 'mobile' ? (isDark ? 'bg-zinc-800 hover:bg-zinc-700 text-emerald-400 border-zinc-700' : 'bg-slate-100 hover:bg-slate-200 text-emerald-700 border-slate-200') : 'bg-emerald-500 text-slate-950 font-black shadow-sm'"
                             :title="viewMode === 'mobile' ? 'ডেস্কটপ ভিউতে সুইচ করুন (Switch to Desktop View)' : 'মোবাইল ভিউতে সুইচ করুন (Switch to Mobile View)'">
                         <span x-text="viewMode === 'mobile' ? '💻' : '📱'"></span>
-                        <span class="hidden sm:inline" x-text="viewMode === 'mobile' ? 'ডেস্কটপ ভিউ' : 'মোবাইল ভিউ'"></span>
+                        <span class="hidden sm:inline" x-text="viewMode === 'mobile' ? 'ডেস্কটপ' : 'মোবাইল'"></span>
                     </button>
 
                     <!-- Dark / Light Mode Toggle Button -->
@@ -440,16 +449,16 @@
                         </div>
                         <div>
                             <div class="flex items-center gap-2 flex-wrap">
-                                <h3 class="font-black text-sm sm:text-base tracking-tight" x-text="lang === 'bn' ? 'কোর্ট বর্তমানে বন্ধ রয়েছে (Court is Closed)' : 'Court is Currently Closed'"></h3>
+                                <h3 class="font-black text-sm sm:text-base tracking-tight" x-text="lang === 'bn' ? 'কার্ট বর্তমানে বন্ধ রয়েছে (Cart is Closed)' : 'Cart is Currently Closed'"></h3>
                                 <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-rose-500/20 text-rose-400 border border-rose-500/30" x-text="lang === 'bn' ? 'বিক্রি বন্ধ' : 'Sales Paused'"></span>
                             </div>
-                            <p class="text-xs opacity-80 mt-0.5" x-text="lang === 'bn' ? 'আজকের বিক্রয় সেশন শুরু ও মেমো রেকর্ড করতে অনুগ্রহ করে প্রথমে 'ওপেন কোর্ট (Open Court)' বাটনে ক্লিক করুন।' : 'Please open court session to record sales, issue receipts, and begin today\'s business.'"></p>
+                            <p class="text-xs opacity-80 mt-0.5" x-text="lang === 'bn' ? 'আজকের বিক্রয় সেশন শুরু ও মেমো রেকর্ড করতে অনুগ্রহ করে প্রথমে 'ওপেন কার্ট (Open Cart)' বাটনে ক্লিক করুন।' : 'Please open cart session to record sales, issue receipts, and begin today\'s business.'"></p>
                         </div>
                     </div>
                     <button type="button" @click="openCourtModal()"
                             class="px-5 py-2.5 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 text-slate-950 font-black text-xs sm:text-sm shadow-xl shadow-emerald-500/30 active:scale-95 transition-all flex items-center gap-2 cursor-pointer">
                         <span class="text-base">🟢</span>
-                        <span x-text="lang === 'bn' ? 'ওপেন কোর্ট করুন (দিন শুরু)' : 'Open Court (Start Day)'"></span>
+                        <span x-text="lang === 'bn' ? 'ওপেন কার্ট করুন (দিন শুরু)' : 'Open Cart (Start Day)'"></span>
                     </button>
                 </div>
 
@@ -460,7 +469,7 @@
                     <div class="flex items-center gap-2 min-w-0">
                         <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse flex-shrink-0"></span>
                         <span class="truncate">
-                            <strong x-text="lang === 'bn' ? 'কোর্ট সেশন চালু রয়েছে' : 'Court Session is Active'"></strong>
+                            <strong x-text="lang === 'bn' ? 'কার্ট সেশন চালু রয়েছে' : 'Cart Session is Active'"></strong>
                             <span x-show="courtSession.openedAt" class="opacity-80 font-mono" x-text="' (আজ ' + courtSession.openedAt + ' থেকে খোলা)'"></span>
                             <span class="hidden md:inline opacity-75 font-normal" x-text="lang === 'bn' ? '• সকল বিক্রয় মেমো সফলভাবে রেকর্ড হচ্ছে' : '• Sales and receipts are recording live'"></span>
                         </span>
@@ -468,7 +477,7 @@
                     <button type="button" @click="openCloseCourtModal()"
                             class="px-3.5 py-1.5 rounded-xl bg-rose-500/20 hover:bg-rose-500/30 text-rose-400 border border-rose-500/40 text-xs font-black cursor-pointer active:scale-95 transition-all flex items-center gap-1.5 shadow-sm">
                         <span>🔴</span>
-                        <span x-text="lang === 'bn' ? 'ক্লোজ কোর্ট (দিন সমাপ্ত ও Z-Report)' : 'Close Court (End Day & Z-Report)'"></span>
+                        <span x-text="lang === 'bn' ? 'ক্লোজ কার্ট (দিন সমাপ্ত ও Z-Report)' : 'Close Cart (End Day & Z-Report)'"></span>
                     </button>
                 </div>
                     
@@ -2686,7 +2695,7 @@
                             🟢
                         </div>
                         <div>
-                            <h3 class="font-black text-base" x-text="lang === 'bn' ? 'ওপেন কোর্ট (দিন শুরু)' : 'Open Court (Start Day)'"></h3>
+                            <h3 class="font-black text-base" x-text="lang === 'bn' ? 'ওপেন কার্ট (দিন শুরু)' : 'Open Cart (Start Day)'"></h3>
                             <p class="text-[11px] text-slate-400" x-text="lang === 'bn' ? 'আজকের বিক্রয় সেশন ও ক্যাশ ড্রয়ার সক্রিয় করুন' : 'Activate daily register and begin selling'"></p>
                         </div>
                     </div>
@@ -2739,7 +2748,7 @@
                     <button type="button" @click="confirmOpenCourt()"
                             class="flex-1 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 text-slate-950 font-black text-xs shadow-lg shadow-emerald-500/25 cursor-pointer active:scale-95 transition-all flex items-center justify-center gap-1.5">
                         <span>✓</span>
-                        <span x-text="lang === 'bn' ? 'ওপেন করুন ও বিক্রি শুরু' : 'Open Court & Start'"></span>
+                        <span x-text="lang === 'bn' ? 'ওপেন কার্ট করুন ও বিক্রি শুরু' : 'Open Cart & Start'"></span>
                     </button>
                 </div>
 
@@ -2770,7 +2779,7 @@
                             🏁
                         </div>
                         <div>
-                            <h3 class="font-black text-base" x-text="lang === 'bn' ? 'ক্লোজ কোর্ট ও দিন সমাপ্ত (Z-Report)' : 'Close Court & Day End (Z-Report)'"></h3>
+                            <h3 class="font-black text-base" x-text="lang === 'bn' ? 'ক্লোজ কার্ট ও দিন সমাপ্ত (Z-Report)' : 'Close Cart & Day End (Z-Report)'"></h3>
                             <p class="text-[11px] text-slate-400" x-text="lang === 'bn' ? 'আজকের বিক্রয় সমাপ্তি ও আর্থিক সমন্বয় খতিয়ান' : 'Reconcile daily revenues and finalize day'"></p>
                         </div>
                     </div>
@@ -2845,7 +2854,7 @@
                     <button type="button" @click="confirmCloseCourt()"
                             class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-500 text-white font-black text-sm shadow-xl shadow-rose-500/30 cursor-pointer active:scale-95 transition-all flex items-center justify-center gap-2">
                         <span>🏁</span>
-                        <span x-text="lang === 'bn' ? '✓ নিশ্চিত: দিন সমাপ্ত ও কোর্ট ক্লোজ করুন' : 'Confirm: Close Court & End Day'"></span>
+                        <span x-text="lang === 'bn' ? '✓ নিশ্চিত: দিন সমাপ্ত ও কার্ট ক্লোজ করুন' : 'Confirm: Close Cart & End Day'"></span>
                     </button>
                     
                     <div class="flex items-center gap-2">
@@ -3966,7 +3975,12 @@
                     this.lang = selectedLang;
                     document.documentElement.lang = selectedLang;
                     localStorage.setItem('khabarbari_lang', selectedLang);
-                    this.showToast(selectedLang === 'bn' ? 'বাংলা ভাষা নির্বাচন করা হয়েছে' : 'Language set to English');
+                    this.showToast(selectedLang === 'bn' ? 'বাংলা ভাষা নির্বাচন করা হয়েছে 🇧🇩' : 'Language set to English 🇬🇧');
+                },
+
+                toggleLanguage() {
+                    const nextLang = this.lang === 'bn' ? 'en' : 'bn';
+                    this.setLanguage(nextLang);
                 },
 
                 initApp() {
@@ -4168,7 +4182,7 @@
                     this.closedSessionsHistory.unshift(sessionSummary);
                     this.saveCourtStatus();
                     this.showCloseCourtModal = false;
-                    this.showToast((this.lang === 'bn' ? '🏁 আজকের দিন সফলভাবে সমাপ্ত ও কোর্ট ক্লোজ হয়েছে!' : '🏁 Court closed for today! Z-Report saved'), '🏁');
+                    this.showToast((this.lang === 'bn' ? '🏁 আজকের দিন সফলভাবে সমাপ্ত ও কার্ট ক্লোজ হয়েছে!' : '🏁 Cart closed for today! Z-Report saved'), '🏁');
                     this.playChime(420);
                 },
 
@@ -4794,7 +4808,7 @@
                 submitQuickAmountSale() {
                     // Enforce Open Court check
                     if (!this.isCourtOpen) {
-                        this.showToast((this.lang === 'bn' ? 'কোর্ট বর্তমানে বন্ধ রয়েছে! বিক্রি করতে প্রথমে "ওপেন কোর্ট" করুন' : 'Court is closed! Please open court first'), '🔒', 'error');
+                        this.showToast((this.lang === 'bn' ? 'কার্ট বর্তমানে বন্ধ রয়েছে! বিক্রি করতে প্রথমে "ওপেন কার্ট" করুন' : 'Cart is closed! Please open cart first'), '🔒', 'error');
                         this.openCourtModal();
                         return;
                     }
@@ -4864,7 +4878,7 @@
 
                     // Enforce Open Court check
                     if (!this.isCourtOpen) {
-                        this.showToast((this.lang === 'bn' ? 'কোর্ট বর্তমানে বন্ধ রয়েছে! বিক্রি করতে প্রথমে "ওপেন কোর্ট" করুন' : 'Court is closed! Please open court first'), '🔒', 'error');
+                        this.showToast((this.lang === 'bn' ? 'কার্ট বর্তমানে বন্ধ রয়েছে! বিক্রি করতে প্রথমে "ওপেন কার্ট" করুন' : 'Cart is closed! Please open cart first'), '🔒', 'error');
                         this.openCourtModal();
                         return;
                     }
