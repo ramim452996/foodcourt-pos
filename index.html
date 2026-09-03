@@ -308,7 +308,7 @@
                                 <template x-if="currentUserRole === 'superadmin'">
                                     <div class="relative inline-flex items-center max-w-full">
                                         <select x-model="adminViewingOwnerId" @change="adminSwitchToOwner(adminViewingOwnerId)" 
-                                                class="text-xs sm:text-sm font-black bg-emerald-500/10 dark:bg-emerald-950/40 text-amber-500 dark:text-amber-400 border border-amber-500/30 rounded-xl px-2.5 py-1 cursor-pointer focus:ring-1 focus:ring-amber-400 max-w-[210px] sm:max-w-[260px] truncate shadow-xs">
+                                                class="text-xs sm:text-sm font-black bg-emerald-500/10 dark:bg-emerald-950/40 text-amber-500 dark:text-amber-400 border border-amber-500/30 rounded-xl px-2.5 py-1 cursor-pointer focus:ring-1 focus:ring-amber-400 w-[140px] xs:w-[180px] sm:w-[260px] truncate shadow-xs">
                                             <option value="all" class="bg-zinc-900 text-amber-400" x-text="lang === 'bn' ? '🌐 সকল ফুডকার্ট (সম্মিলিত)' : '🌐 All Food Courts (Combined)'"></option>
                                             <template x-for="owner in ownerAccounts" :key="owner.id">
                                                 <option :value="owner.id" class="bg-zinc-900 text-white" x-text="owner.shopName"></option>
@@ -375,12 +375,13 @@
                         </template>
                     </div>
 
-                    <!-- 📲 Direct 1-Click Install App on Android -->
+                    <!-- 📲 Direct 1-Click Install App on Android (Hidden on very small screens since banner is there) -->
                     <button type="button" @click="triggerInstallApp(); playChime(600)" 
-                            class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-400 via-teal-500 to-emerald-600 text-slate-950 text-[11px] font-black transition-all flex items-center gap-1.5 cursor-pointer active:scale-95 shadow-md shadow-emerald-500/30 ring-1 ring-emerald-300"
+                            class="hidden xs:flex px-2.5 sm:px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-400 via-teal-500 to-emerald-600 text-slate-950 text-[10px] sm:text-[11px] font-black transition-all items-center gap-1 cursor-pointer active:scale-95 shadow-md shadow-emerald-500/30 ring-1 ring-emerald-300"
                             :title="lang === 'bn' ? 'ফোনে সরাসরি অ্যাপ হিসেবে ইনস্টল করুন' : 'Install App Directly on Phone'">
                         <span class="text-xs">📲</span>
-                        <span x-text="lang === 'bn' ? 'ইনস্টল অ্যাপ' : 'Install App'"></span>
+                        <span class="hidden sm:inline" x-text="lang === 'bn' ? 'ইনস্টল অ্যাপ' : 'Install App'"></span>
+                        <span class="sm:hidden" x-text="lang === 'bn' ? 'অ্যাপ' : 'App'"></span>
                     </button>
 
                     <!-- Language Switcher Button (Bangla <-> English) -->
@@ -474,47 +475,47 @@
             <div class="w-full space-y-3 sm:space-y-4">
 
                 <!-- 📲 1-CLICK APP INSTALLATION BANNER (Official Android PWA WebAPK) -->
-                <div class="px-4 py-3 rounded-2xl border flex flex-wrap items-center justify-between gap-3 shadow-lg transition-all"
-                     :class="isDark ? 'bg-gradient-to-r from-emerald-950/60 via-obsidian-950 to-teal-950/60 border-emerald-500/30 text-emerald-200' : 'bg-gradient-to-r from-emerald-50 to-teal-50 border-emerald-200 text-emerald-950'">
-                    <div class="flex items-center gap-2.5">
-                        <div class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-xl flex-shrink-0">
+                <div class="p-2 sm:px-4 sm:py-3 rounded-2xl border flex items-center justify-between gap-2 shadow-lg transition-all"
+                     :class="isDark ? 'bg-gradient-to-r from-emerald-950/40 via-obsidian-900 to-teal-950/40 border-emerald-500/20 text-emerald-200 backdrop-blur-md' : 'bg-gradient-to-r from-emerald-50 to-teal-50 border-emerald-200 text-emerald-950 backdrop-blur-md'">
+                    <div class="flex items-center gap-2 overflow-hidden">
+                        <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-lg sm:text-xl flex-shrink-0">
                             📲
                         </div>
-                        <div>
-                            <h4 class="font-black text-xs sm:text-sm" x-text="lang === 'bn' ? 'অ্যান্ড্রয়েড ফোন অ্যাপ ১-ক্লিকে ইনস্টল করুন' : 'Install Official Android Phone App'"></h4>
-                            <p class="text-[11px] opacity-80" x-text="lang === 'bn' ? '১০০% অফলাইন ও অনলাইন মোড সাপোর্টেড। ইন্টারনেট ছাড়া সরাসরি ফোন থেকে ব্যবহারযোগ্য।' : 'Works 100% offline & online directly from your phone screen.'"></p>
+                        <div class="min-w-0 flex-1">
+                            <h4 class="font-black text-[11px] sm:text-sm truncate" x-text="lang === 'bn' ? 'অ্যান্ড্রয়েড অ্যাপ ১-ক্লিকে ইনস্টল' : 'Install Official Android App'"></h4>
+                            <p class="text-[9px] sm:text-[11px] opacity-80 truncate" x-text="lang === 'bn' ? 'অফলাইন ও অনলাইন সাপোর্টেড' : 'Works offline & online directly'"></p>
                         </div>
                     </div>
-                    <div class="flex items-center gap-2">
-                        <button type="button" @click="triggerInstallApp(); playChime(650)"
-                                class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs shadow-md shadow-emerald-500/25 active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer">
-                            <span>⚡</span>
-                            <span x-text="lang === 'bn' ? 'ফোনে সরাসরি ইনস্টল করুন' : 'Install App on Phone'"></span>
-                        </button>
-                    </div>
+                    <button type="button" @click="triggerInstallApp(); playChime(650)"
+                            class="flex-shrink-0 px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 text-slate-950 font-black text-[10px] sm:text-xs shadow-md shadow-emerald-500/25 active:scale-95 transition-all flex items-center gap-1 cursor-pointer">
+                        <span>⚡</span>
+                        <span x-text="lang === 'bn' ? 'ইনস্টল' : 'Install'"></span>
+                    </button>
                 </div>
 
                 <!-- COURT OPERATIONAL STATUS ALERT BANNER (Open Court / Close Court) -->
                 <!-- State A: Court Closed Banner -->
                 <div x-show="!isCourtOpen" 
-                     class="p-4 rounded-2xl border shadow-xl flex flex-wrap items-center justify-between gap-3 transition-all"
-                     :class="isDark ? 'bg-gradient-to-r from-amber-950/70 via-obsidian-950 to-amber-950/70 border-amber-500/50 text-amber-200' : 'bg-gradient-to-r from-amber-50 to-orange-50 border-amber-300 text-amber-950'">
-                    <div class="flex items-center gap-3">
-                        <div class="w-11 h-11 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/40 flex items-center justify-center text-2xl font-black flex-shrink-0 shadow-sm">
+                     class="p-3 sm:p-4 rounded-2xl border shadow-xl flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 transition-all relative overflow-hidden"
+                     :class="isDark ? 'bg-gradient-to-br from-amber-950/40 to-rose-950/20 border-amber-500/30 text-amber-200' : 'bg-gradient-to-br from-amber-50 to-orange-50 border-amber-300 text-amber-950'">
+                    <!-- Subtle decorative background glow -->
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                    <div class="flex flex-col sm:flex-row items-center sm:items-start gap-3 w-full sm:w-auto text-center sm:text-left z-10">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-amber-500/20 to-rose-500/20 text-amber-400 border border-amber-500/40 flex items-center justify-center text-xl sm:text-2xl font-black flex-shrink-0 shadow-sm mx-auto sm:mx-0">
                             🔒
                         </div>
                         <div>
-                            <div class="flex items-center gap-2 flex-wrap">
-                                <h3 class="font-black text-sm sm:text-base tracking-tight" x-text="lang === 'bn' ? 'কার্ট বর্তমানে বন্ধ রয়েছে (Cart is Closed)' : 'Cart is Currently Closed'"></h3>
-                                <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-rose-500/20 text-rose-400 border border-rose-500/30" x-text="lang === 'bn' ? 'বিক্রি বন্ধ' : 'Sales Paused'"></span>
+                            <div class="flex flex-col sm:flex-row items-center gap-1.5 sm:gap-2 justify-center sm:justify-start">
+                                <h3 class="font-black text-[13px] sm:text-base tracking-tight" x-text="lang === 'bn' ? 'কার্ট বর্তমানে বন্ধ রয়েছে' : 'Cart is Closed'"></h3>
+                                <span class="px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-black bg-rose-500/20 text-rose-500 border border-rose-500/30" x-text="lang === 'bn' ? 'বিক্রি বন্ধ' : 'Sales Paused'"></span>
                             </div>
-                            <p class="text-xs opacity-80 mt-0.5" x-text="lang === 'bn' ? 'আজকের বিক্রয় সেশন শুরু ও মেমো রেকর্ড করতে অনুগ্রহ করে প্রথমে 'ওপেন কার্ট (Open Cart)' বাটনে ক্লিক করুন।' : 'Please open cart session to record sales, issue receipts, and begin today\'s business.'"></p>
+                            <p class="text-[10px] sm:text-xs opacity-80 mt-1" x-text="lang === 'bn' ? 'বিক্রয় শুরু করতে ওপেন কার্ট করুন' : 'Open cart to begin today\'s sales'"></p>
                         </div>
                     </div>
                     <button type="button" @click="openCourtModal()"
-                            class="px-5 py-2.5 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 text-slate-950 font-black text-xs sm:text-sm shadow-xl shadow-emerald-500/30 active:scale-95 transition-all flex items-center gap-2 cursor-pointer">
-                        <span class="text-base">🟢</span>
-                        <span x-text="lang === 'bn' ? 'ওপেন কার্ট করুন (দিন শুরু)' : 'Open Cart (Start Day)'"></span>
+                            class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 text-slate-950 font-black text-[11px] sm:text-sm shadow-lg shadow-emerald-500/30 active:scale-95 transition-all flex items-center justify-center gap-1.5 cursor-pointer z-10">
+                        <span class="text-sm sm:text-base">🟢</span>
+                        <span x-text="lang === 'bn' ? 'ওপেন কার্ট' : 'Open Cart'"></span>
                     </button>
                 </div>
 
