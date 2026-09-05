@@ -1363,8 +1363,8 @@
                             </div>
 
                             <!-- SVG Curved Line & Gradient Area Graph -->
-                            <div class="pt-1">
-                                <svg viewBox="0 0 600 180" class="w-full h-32 sm:h-40 overflow-visible">
+                            <div class="pt-1 w-full max-w-full overflow-hidden">
+                                <svg viewBox="-10 0 620 180" class="w-full h-32 sm:h-40 block">
                                     <defs>
                                         <linearGradient id="growthAreaGrad" x1="0" y1="0" x2="0" y2="1">
                                             <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.45"/>
@@ -5633,7 +5633,8 @@
                         cumulative = 56000;
                     } else {
                         const sampleOrders = list.slice(-8); // recent up to 8 sales points
-                        const maxVal = Math.max(1000, this.todayStats.totalRevenue * 1.15);
+                        const totalSampleRevenue = sampleOrders.reduce((sum, o) => sum + Number(o.grandTotal || 0), 0);
+                        const maxVal = Math.max(1000, totalSampleRevenue * 1.15);
                         
                         points.push({
                             x: 35,
