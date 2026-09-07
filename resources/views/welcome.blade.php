@@ -157,24 +157,38 @@
             transform: translateZ(0);
         }
 
-        /* ── Light Mode Typography (Eye Comfort) ─────────────── */
-        html:not(.dark) { color: #18020f; font-weight: 400; }
+        /* ── Light Mode Typography (High Contrast, Eye-Safe) ──── */
+        html:not(.dark) {
+            color: #1a1a1a;
+            font-weight: 400;
+        }
+        /* Headings / Primary text → near-black */
         html:not(.dark) .text-slate-900, html:not(.dark) .text-slate-800,
-        html:not(.dark) .text-zinc-900,  html:not(.dark) .text-zinc-800  { color: #100008 !important; font-weight: 700; }
+        html:not(.dark) .text-zinc-900,  html:not(.dark) .text-zinc-800 {
+            color: #111111 !important;
+            font-weight: 700;
+        }
+        /* Secondary text → dark grey */
         html:not(.dark) .text-slate-700, html:not(.dark) .text-slate-600,
-        html:not(.dark) .text-zinc-700,  html:not(.dark) .text-zinc-600  { color: #2d0c1e !important; font-weight: 600; }
+        html:not(.dark) .text-zinc-700,  html:not(.dark) .text-zinc-600 {
+            color: #374151 !important;
+            font-weight: 600;
+        }
+        /* Muted/helper text → medium grey, readable */
         html:not(.dark) .text-slate-500, html:not(.dark) .text-slate-400,
-        html:not(.dark) .text-zinc-500,  html:not(.dark) .text-zinc-400  { color: #6b3050 !important; font-weight: 500; }
-        html:not(.dark) .text-brand-500, html:not(.dark) .text-brand-400 { color: #b5094f !important; font-weight: 700; }
+        html:not(.dark) .text-zinc-500,  html:not(.dark) .text-zinc-400 {
+            color: #6b7280 !important;
+            font-weight: 500;
+        }
+        /* Brand accent → Foodpanda deep pink */
+        html:not(.dark) .text-brand-500, html:not(.dark) .text-brand-400 { color: #D70F64 !important; font-weight: 700; }
         html:not(.dark) .text-amber-500, html:not(.dark) .text-amber-400 { color: #b45309 !important; font-weight: 700; }
-        html:not(.dark) input, html:not(.dark) select, html:not(.dark) textarea { color: #100008 !important; font-weight: 500; }
-        html:not(.dark) input::placeholder { color: #9e6b82 !important; font-weight: 400; }
+        html:not(.dark) input, html:not(.dark) select, html:not(.dark) textarea { color: #111111 !important; font-weight: 500; }
+        html:not(.dark) input::placeholder { color: #9ca3af !important; font-weight: 400; }
 
-        /* ── Dark Mode Typography ────────────────────────────── */
-        html.dark { color: #f5dce8; }
-        html.dark .text-zinc-100 { color: #fdedf5 !important; }
-        html.dark .text-zinc-200 { color: #f5dce8 !important; }
-        html.dark .text-zinc-400 { color: #d4a0b8 !important; }
+        /* ── Dark Mode Typography (Proper White/Grey, NOT pink) ── */
+        /* Dark mode text stays white/grey — only accents are pink */
+        html.dark { color: #f1f5f9; }
 
         /* ── Hover Effects Library ───────────────────────────── */
         /* Food Card hover: lift + pink glow */
