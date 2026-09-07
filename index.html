@@ -15,10 +15,11 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="FoodCourt POS">
     
-    <!-- Google Fonts: Noto Sans Bengali (Primary), Plus Jakarta Sans (Latin), JetBrains Mono -->
+    <!-- Fonts: Inter (English/Latin) + Noto Sans Bengali (Bengali script) + JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Inter covers Latin A-Z perfectly; Noto Sans Bengali covers ক-হ Bengali script -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+Bengali:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -32,7 +33,7 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['"Noto Sans Bengali"', '"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+                        sans: ['"Inter"', '"Noto Sans Bengali"', 'system-ui', 'sans-serif'],
                         mono: ['"JetBrains Mono"', 'monospace'],
                     },
                     colors: {
@@ -94,12 +95,37 @@
             font-size: 15px;
         }
 
+        /* ── Unicode-range font splitting ──────────────────────
+           Inter renders Latin (English A-Z, 0-9, punctuation)
+           Noto Sans Bengali renders Bengali script (ক-হ, ০-৯)
+           Browser picks the right font automatically per character.
+        ─────────────────────────────────────────────────────── */
+        @font-face {
+            font-family: 'AppFont-Latin';
+            src: local('Inter');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC,
+                           U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074,
+                           U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+                           U+FEFF, U+FFFD;
+        }
+        @font-face {
+            font-family: 'AppFont-Bengali';
+            src: local('Noto Sans Bengali');
+            unicode-range: U+0980-09FF; /* Bengali block */
+        }
+
         body {
-            font-family: 'Noto Sans Bengali', 'Plus Jakarta Sans', system-ui, sans-serif;
+            /* Inter for Latin, Noto Sans Bengali for বাংলা */
+            font-family: 'Inter', 'Noto Sans Bengali', system-ui, sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             letter-spacing: 0.01em;
-            line-height: 1.6;
+            line-height: 1.65;
+        }
+
+        /* Bengali-script elements use Noto Sans Bengali first */
+        :lang(bn), [lang="bn"], .bn {
+            font-family: 'Noto Sans Bengali', 'Inter', system-ui, sans-serif;
         }
 
         /* ── Global Smooth Transition (NOT on scroll) ─────────── */
