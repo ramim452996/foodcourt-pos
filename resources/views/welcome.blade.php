@@ -9,17 +9,16 @@
     <link rel="alternate icon" href="./favicon.svg">
     <link rel="apple-touch-icon" href="./favicon.svg">
     <link rel="manifest" href="./manifest.json">
-    <meta name="theme-color" content="#10b981">
+    <meta name="theme-color" content="#D70F64">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="FoodCourt POS">
     
-    <!-- Google Fonts: Hind Siliguri, Plus Jakarta Sans, Inter, & JetBrains Mono -->
+    <!-- Google Fonts: Noto Sans Bengali (Primary), Plus Jakarta Sans (Latin), JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -33,24 +32,28 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['"Noto Sans Bengali"', '"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+                        sans: ['"Noto Sans Bengali"', '"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
                         mono: ['"JetBrains Mono"', 'monospace'],
                     },
                     colors: {
                         obsidian: {
-                            800: '#1a1a24',
-                            850: '#14141d',
-                            900: '#0f0f16',
-                            925: '#0b0b10',
-                            950: '#07070b',
+                            800: '#1e1520',
+                            850: '#170f19',
+                            900: '#110b12',
+                            925: '#0d080e',
+                            950: '#080508',
                         },
-                                                brand: {
-                            50: '#fdf2f7',
-                            100: '#f9e1ec',
-                            400: '#ef5a96',
+                        brand: {
+                            50:  '#fff0f5',
+                            100: '#ffd6e7',
+                            200: '#ffadd0',
+                            300: '#ff73ae',
+                            400: '#f5317f',
                             500: '#D70F64',
-                            600: '#b50950',
-                            700: '#91053e',
+                            600: '#b5094f',
+                            700: '#8f053c',
+                            800: '#6b032b',
+                            900: '#47021d',
                         },
                         gold: {
                             400: '#fbbf24',
@@ -61,10 +64,15 @@
                         nagad: '#F7941D',
                     },
                     boxShadow: {
-                        'neon-brand': '0 0 20px -2px rgba(16, 185, 129, 0.35)',
-                        'neon-amber': '0 0 20px -2px rgba(245, 158, 11, 0.35)',
-                        'glass-dark': '0 8px 32px 0 rgba(0, 0, 0, 0.45), inset 0 1px 0 0 rgba(255, 255, 255, 0.08)',
-                        'food-card-hover': '0 16px 28px -8px rgba(0, 0, 0, 0.45), 0 0 20px -2px rgba(16, 185, 129, 0.22)',
+                        'neon-brand':     '0 0 20px -2px rgba(215, 15, 100, 0.40)',
+                        'neon-amber':     '0 0 20px -2px rgba(245, 158, 11, 0.35)',
+                        'glass-dark':     '0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255,255,255,0.06)',
+                        'food-card-hover':'0 12px 28px -6px rgba(215, 15, 100, 0.28), 0 4px 12px rgba(0,0,0,0.2)',
+                    },
+                    borderRadius: {
+                        'xl': '10px',
+                        '2xl': '14px',
+                        '3xl': '18px',
                     }
                 }
             }
@@ -73,187 +81,153 @@
 
     <style>
         [x-cloak] { display: none !important; }
-        
+
+        /* ── Base Resets ───────────────────────────────────────── */
+        *, *::before, *::after { box-sizing: border-box; }
+
         html {
             scroll-behavior: smooth;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeSpeed;
+            text-rendering: optimizeLegibility;
             touch-action: manipulation;
+            font-size: 15px;
         }
 
-        /* 0ms Mobile Tap Response on all clickable controls */
-        button, a, input, select, textarea, [role="button"], .cursor-pointer {
-            touch-action: manipulation;
-            -webkit-tap-highlight-color: transparent;
-            user-select: none;
-        }
-
-        /* Mobile GPU Shader Optimization: Swap heavy backdrop-blur for solid translucent glass on small screens */
-        @media (max-width: 768px) {
-            .glass-panel-dark {
-                background: rgba(12, 12, 18, 0.98) !important;
-                backdrop-filter: none !important;
-                -webkit-backdrop-filter: none !important;
-            }
-            .glass-panel-light {
-                background: rgba(255, 255, 255, 0.98) !important;
-                backdrop-filter: none !important;
-                -webkit-backdrop-filter: none !important;
-            }
-            .backdrop-blur-xl, .backdrop-blur-md, .backdrop-blur-lg {
-                backdrop-filter: none !important;
-                -webkit-backdrop-filter: none !important;
-            }
-        }
-
-        button, a, input, select, textarea, .transition-colors, .transition-all, .group {
-            transition-property: background-color, border-color, color, fill, stroke, box-shadow, transform, opacity;
-            transition-duration: 300ms;
-            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* Font Smoothing & High-Legibility Rendering */
         body {
+            font-family: 'Noto Sans Bengali', 'Plus Jakarta Sans', system-ui, sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeLegibility;
+            letter-spacing: 0.01em;
+            line-height: 1.6;
         }
 
-        /* Ambient Dark & Luxury Porcelain Light Mode */
+        /* ── Global Smooth Transition (NOT on scroll) ─────────── */
+        button, a, input, select, textarea, [role="button"], .cursor-pointer,
+        .transition-all, .transition-colors {
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            transition: background-color 200ms ease, border-color 200ms ease,
+                        color 200ms ease, box-shadow 200ms ease,
+                        transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1),
+                        opacity 200ms ease;
+        }
+
+        /* ── Foodpanda-inspired Background Gradients ─────────── */
         .dark-ambient-bg {
-            background-color: #07070b;
-            background-image: 
-                radial-gradient(circle at 10% 8%, rgba(16, 185, 129, 0.10) 0%, transparent 45%),
-                radial-gradient(circle at 90% 12%, rgba(245, 158, 11, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 50% 92%, rgba(99, 102, 241, 0.06) 0%, transparent 50%);
-            background-repeat: no-repeat; background-size: cover;
+            background-color: #110b12;
+            background-image:
+                radial-gradient(ellipse at 15% 10%, rgba(215,15,100,0.12) 0%, transparent 50%),
+                radial-gradient(ellipse at 88% 8%,  rgba(245,158,11,0.07) 0%, transparent 40%),
+                radial-gradient(ellipse at 50% 95%, rgba(215,15,100,0.06) 0%, transparent 55%);
+            background-attachment: fixed;
         }
 
-        /* Luxury Porcelain Silk Light Mode */
         .light-ambient-bg {
-            background-color: #f4f6fb;
-            background-image: 
-                radial-gradient(circle at 8% 6%, rgba(16, 185, 129, 0.08) 0%, transparent 45%),
-                radial-gradient(circle at 92% 10%, rgba(245, 158, 11, 0.09) 0%, transparent 40%),
-                radial-gradient(circle at 50% 95%, rgba(99, 102, 241, 0.05) 0%, transparent 50%),
-                linear-gradient(180deg, #ffffff 0%, #edf1f8 100%);
-            background-repeat: no-repeat; background-size: cover;
+            background-color: #faf5f8;
+            background-image:
+                radial-gradient(ellipse at 5%  0%,  rgba(215,15,100,0.07) 0%, transparent 45%),
+                radial-gradient(ellipse at 95% 5%,  rgba(245,158,11,0.06) 0%, transparent 40%),
+                linear-gradient(180deg, #fff8fb 0%, #faf0f5 100%);
+            background-attachment: fixed;
         }
 
-        /* Ultra-Crisp Light Mode Font Legibility & Contrast */
-        html:not(.dark) {
-            color: #090d16;
-            font-weight: 500;
-        }
-        html:not(.dark) .text-slate-900,
-        html:not(.dark) .text-slate-800,
-        html:not(.dark) .text-zinc-900,
-        html:not(.dark) .text-zinc-800 {
-            color: #040814 !important;
-            font-weight: 700;
-        }
-        html:not(.dark) .text-slate-700,
-        html:not(.dark) .text-slate-600,
-        html:not(.dark) .text-zinc-700,
-        html:not(.dark) .text-zinc-600 {
-            color: #1e293b !important;
-            font-weight: 600;
-        }
-        html:not(.dark) .text-slate-500,
-        html:not(.dark) .text-slate-400,
-        html:not(.dark) .text-zinc-500,
-        html:not(.dark) .text-zinc-400 {
-            color: #334155 !important; /* darkened to high-legibility charcoal */
-            font-weight: 600;
-        }
-        html:not(.dark) .text-brand-500,
-        html:not(.dark) .text-brand-400 {
-            color: #047857 !important; /* deep rich brand */
-            font-weight: 800;
-        }
-        html:not(.dark) .text-amber-500,
-        html:not(.dark) .text-amber-400 {
-            color: #b45309 !important; /* deep rich amber */
-            font-weight: 800;
-        }
-        html:not(.dark) input,
-        html:not(.dark) select,
-        html:not(.dark) textarea {
-            color: #040814 !important;
-            font-weight: 600;
-        }
-        html:not(.dark) input::placeholder {
-            color: #64748b !important;
-            font-weight: 500;
+        /* ── Mobile GPU Optimization ─────────────────────────── */
+        @media (max-width: 768px) {
+            .glass-panel-dark  { background: rgba(20, 10, 22, 0.97) !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+            .glass-panel-light { background: rgba(255, 248, 251, 0.99) !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+            .backdrop-blur-xl, .backdrop-blur-md, .backdrop-blur-lg { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
         }
 
-        /* Glassmorphic Panels */
+        /* ── Glassmorphic Panels ─────────────────────────────── */
         .glass-panel-dark {
-            background: rgba(15, 15, 22, 0.84);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            background: rgba(24, 10, 26, 0.82);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(215, 15, 100, 0.12);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.05);
             transform: translateZ(0);
         }
-
         .glass-panel-light {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(203, 213, 225, 0.95);
-            box-shadow: 0 10px 30px -4px rgba(15, 23, 42, 0.08), 0 2px 8px -2px rgba(15, 23, 42, 0.04);
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(215, 15, 100, 0.10);
+            box-shadow: 0 4px 20px rgba(215,15,100,0.06), 0 1px 4px rgba(0,0,0,0.04);
             transform: translateZ(0);
         }
 
-        /* Smooth Custom Scrollbars */
-        ::-webkit-scrollbar {
-            width: 5px;
-            height: 5px;
+        /* ── Light Mode Typography (Eye Comfort) ─────────────── */
+        html:not(.dark) { color: #18020f; font-weight: 400; }
+        html:not(.dark) .text-slate-900, html:not(.dark) .text-slate-800,
+        html:not(.dark) .text-zinc-900,  html:not(.dark) .text-zinc-800  { color: #100008 !important; font-weight: 700; }
+        html:not(.dark) .text-slate-700, html:not(.dark) .text-slate-600,
+        html:not(.dark) .text-zinc-700,  html:not(.dark) .text-zinc-600  { color: #2d0c1e !important; font-weight: 600; }
+        html:not(.dark) .text-slate-500, html:not(.dark) .text-slate-400,
+        html:not(.dark) .text-zinc-500,  html:not(.dark) .text-zinc-400  { color: #6b3050 !important; font-weight: 500; }
+        html:not(.dark) .text-brand-500, html:not(.dark) .text-brand-400 { color: #b5094f !important; font-weight: 700; }
+        html:not(.dark) .text-amber-500, html:not(.dark) .text-amber-400 { color: #b45309 !important; font-weight: 700; }
+        html:not(.dark) input, html:not(.dark) select, html:not(.dark) textarea { color: #100008 !important; font-weight: 500; }
+        html:not(.dark) input::placeholder { color: #9e6b82 !important; font-weight: 400; }
+
+        /* ── Dark Mode Typography ────────────────────────────── */
+        html.dark { color: #f5dce8; }
+        html.dark .text-zinc-100 { color: #fdedf5 !important; }
+        html.dark .text-zinc-200 { color: #f5dce8 !important; }
+        html.dark .text-zinc-400 { color: #d4a0b8 !important; }
+
+        /* ── Hover Effects Library ───────────────────────────── */
+        /* Food Card hover: lift + pink glow */
+        .food-card {
+            transition: transform 220ms cubic-bezier(0.34,1.56,0.64,1),
+                        box-shadow 220ms ease, border-color 200ms ease;
         }
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(148, 163, 184, 0.3);
-            border-radius: 9999px;
-        }
-        .dark ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.12);
-        }
-        .dark ::-webkit-scrollbar-thumb:hover {
-            background: rgba(16, 185, 129, 0.45);
+        .food-card:hover {
+            transform: translateY(-4px) scale(1.012);
+            box-shadow: 0 14px 30px -6px rgba(215,15,100,0.28), 0 4px 12px rgba(0,0,0,0.15);
+            border-color: rgba(215,15,100,0.45) !important;
         }
 
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
+        /* Button hover: slight scale + shadow */
+        .btn-primary {
+            transition: transform 180ms cubic-bezier(0.34,1.56,0.64,1), box-shadow 180ms ease, filter 180ms ease;
         }
-        .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
+        .btn-primary:hover  { transform: translateY(-1px); filter: brightness(1.08); box-shadow: 0 6px 18px rgba(215,15,100,0.4); }
+        .btn-primary:active { transform: scale(0.97); }
 
-        /* Thermal Printing */
-        @media screen {
-            #printable-receipt {
-                display: none !important;
-            }
-        }
+        /* Nav/Tab hover */
+        .nav-tab { transition: background 180ms ease, color 180ms ease, transform 180ms ease; }
+        .nav-tab:hover:not(.active) { transform: translateY(-1px); }
+
+        /* Category pill hover */
+        .cat-pill { transition: transform 180ms cubic-bezier(0.34,1.56,0.64,1), box-shadow 180ms ease, background 180ms ease; }
+        .cat-pill:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(215,15,100,0.25); }
+        .cat-pill:active { transform: scale(0.96); }
+
+        /* Glass panel hover */
+        .panel-hover { transition: box-shadow 220ms ease, border-color 220ms ease, transform 220ms ease; }
+        .panel-hover:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(215,15,100,0.14); border-color: rgba(215,15,100,0.18) !important; }
+
+        /* List row hover */
+        .list-row { transition: background 180ms ease, padding-left 180ms ease; }
+        .list-row:hover { background: rgba(215,15,100,0.07) !important; padding-left: calc(1rem + 3px); }
+
+        /* ── Scrollbars ──────────────────────────────────────── */
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(215,15,100,0.25); border-radius: 9999px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(215,15,100,0.55); }
+        .dark ::-webkit-scrollbar-thumb { background: rgba(215,15,100,0.22); }
+        .dark ::-webkit-scrollbar-thumb:hover { background: rgba(215,15,100,0.50); }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* ── Print / Receipt ─────────────────────────────────── */
+        @media screen { #printable-receipt { display: none !important; } }
         @media print {
             body * { visibility: hidden; }
             #printable-receipt, #printable-receipt * { visibility: visible; }
-            #printable-receipt {
-                display: block !important;
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                margin: 0;
-                padding: 15px;
-                color: #000 !important;
-                background: #fff !important;
-            }
+            #printable-receipt { display: block !important; position: absolute; left: 0; top: 0; width: 100%; margin: 0; padding: 15px; color: #000 !important; background: #fff !important; }
         }
     </style>
 </head>
@@ -587,8 +561,8 @@
                                 <div class="grid w-full"
                                      :class="viewMode === 'mobile' ? 'grid-cols-2 gap-2.5' : 'grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4'">
                                     <template x-for="item in filteredMenuItems" :key="item.id">
-                                        <div class="rounded-lg sm:rounded-xl overflow-hidden transition-all duration-200 flex flex-col justify-between group border relative"
-                                             :class="isDark ? 'bg-obsidian-900/90 border-white/[0.08] hover:border-brand-500/50 hover:shadow-food-card-hover' : 'bg-white border-slate-200/80 hover:border-brand-500/40 shadow-sm hover:shadow-md'">
+                                        <div class="food-card rounded-lg sm:rounded-xl overflow-hidden flex flex-col justify-between group border relative cursor-pointer"
+                                             :class="isDark ? 'bg-obsidian-900/90 border-white/[0.08]' : 'bg-white border-slate-200/80 shadow-sm'">
                                             
                                             <div class="relative h-28 sm:h-36 w-full overflow-hidden bg-zinc-900 flex-shrink-0">
                                                 <img :src="item.image" :alt="item.name" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200 ease-out" loading="lazy" decoding="async">
